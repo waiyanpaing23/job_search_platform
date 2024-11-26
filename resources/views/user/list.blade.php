@@ -16,7 +16,9 @@
                                 <option value="{{ $job->job_title }}">
                             @endforeach
                         </datalist>
-                        <input type="submit" class="btn pink" value="Search">
+
+                        {{-- <input type="submit" class="btn pink" value="Search"> --}}
+                        <button type="submit" class="btn pink"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
 
                 </form>
@@ -72,18 +74,17 @@
                     @foreach ($jobs as $job)
                         <div class="col-6">
 
-                            <div class="px-3 pb-3 mb-4 border rounded">
+                            <div class="px-3 pb-3 mb-4 border rounded shadow-sm">
 
                                 <img src="{{ asset('images/' . $job->employer->company->company_logo) }}"
                                     class="img-fluid jobpost-logo">
                                 <h4><b>{{ $job->job_title }}</b></h4>
                                 <p>{{ $job->employer->company->company_name }}</p>
                                 <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
-                                    class="text-muted me-3">{{ $job->employer->company->location }}</span>
+                                    class="text-muted me-3">{{ $job->location }}</span>
                                 <i class="fa-solid fa-briefcase me-2 text-muted"></i><span
                                     class="text-muted">{{ $job->job_type }}</span>
                                 <p class="text-muted my-3">{{ Str::words($job->description, 15, '...') }}</p>
-                                <a href="" class="btn pink mt-3">View Details</a>
 
                             </div>
 

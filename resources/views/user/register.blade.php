@@ -92,20 +92,33 @@
                             @csrf
 
                             <!-- Name -->
-                            <div>
+                            <div class="d-flex">
+                                <div class="pe-1">
+                                    <div>
+                                        <input class="form-control mb-1" type="text" name="firstname" value="{{ old('firstname') }}"
+                                        placeholder="First Name" required autofocus>
+                                        @error('firstname')
+                                        <small class="text-sm text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
 
-                                <input class="form-control" type="text" name="name" value="{{ old('name') }}"
-                                    placeholder="Enter Your Full Name" required autofocus>
-                                @error('name')
-                                <small class="text-sm text-danger">{{ $message }}</small>
-                                @enderror
+                                <div class="ps-1">
+                                    <div>
+                                        <input class="form-control ms-1" type="text" name="lastname" value="{{ old('lastname') }}"
+                                        placeholder="Last Name" required autofocus>
+                                        @error('lastname')
+                                        <small class="text-sm text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Email Address -->
                             <div class="mt-4">
 
                                 <input class="form-control" type="email" name="email" value="{{ old('email') }}"
-                                    placeholder="Enter Your Email" required>
+                                    placeholder="Email Address" required>
                                 @error('email')
                                 <small class="text-sm text-danger">{{ $message }}</small>
                                 @enderror
@@ -115,7 +128,7 @@
                             <div class="mt-4">
 
                                 <input class="form-control" type="password" name="password"
-                                    placeholder="Enter Your Password" required>
+                                    placeholder="Password" required>
                                 @error('password')
                                 <small class="text-sm text-danger">{{ $message }}</small>
                                 @enderror
@@ -125,7 +138,7 @@
                             <div class="mt-4">
 
                                 <input class="form-control" type="password" name="password_confirmation"
-                                    placeholder="Confirm Your Password" required>
+                                    placeholder="Confirm Password" required>
                                 @error('password_confirmation')
                                 <small class="text-sm text-danger">{{ $message }}</small>
                                 @enderror

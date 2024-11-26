@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('job_type');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('location');
             $table->text('requirement');
             $table->text('benefit')->nullable();
             $table->decimal('min_salary', 10, 2)->nullable();

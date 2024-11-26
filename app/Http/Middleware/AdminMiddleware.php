@@ -20,8 +20,8 @@ class AdminMiddleware
         if(Auth::user()->role == 'admin') {
             return $next($request);
         }
-        
-        abort(404);
+
+        return back();
 
     }
 }

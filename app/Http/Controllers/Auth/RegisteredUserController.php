@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employer;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -34,17 +35,23 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
 
         if($request->role == 'employer') {
             $user = User::create([
-                'name' => $request->name,
+                'first_name' => $request->firstname,
+                'last_name' => $request->lastname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
+            ]);
+
+            Employer::create([
+                'user_id' => $user->id,
             ]);
 
             event(new Registered($user));
@@ -55,7 +62,8 @@ class RegisteredUserController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->firstname,
+            'last_name' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

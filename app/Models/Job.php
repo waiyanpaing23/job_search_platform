@@ -16,6 +16,7 @@ class Job extends Model
         'description',
         'job_type',
         'category_id',
+        'location',
         'requirement',
         'benefit',
         'min_salary',

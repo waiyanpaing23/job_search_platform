@@ -73,6 +73,7 @@
 
                 <div class="col-4 py-4 px-5 bg-white mt-4">
                     <h2 class="mb-4">Login</h2>
+                    <h5>Welcome Back!</h5>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -83,7 +84,7 @@
                         <div class="mt-4">
 
                             <input class="form-control" type="email" name="email" value="{{ old('email') }}"
-                                placeholder="Enter Your Email" required>
+                                placeholder="Email Address" required>
                             @error('email')
                             <small class="text-sm text-danger">{{ $message }}</small>
                             @enderror
@@ -93,7 +94,7 @@
                         <div class="mt-4">
 
                             <input class="form-control" type="password" name="password"
-                                placeholder="Enter Your Password" required>
+                                placeholder="Password" required>
                             @error('password')
                             <small class="text-sm text-danger">{{ $message }}</small>
                             @enderror

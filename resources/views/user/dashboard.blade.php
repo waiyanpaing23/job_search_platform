@@ -16,10 +16,17 @@
 <div class="slider-home row d-flex justify-content-evenly px-3">
     <div class="col-5 p-5 mt-5">
         <h1 class="text-white m-5">Find the most exciting jobs for your career</h1>
-        <div class="input-group mb-3 mt-5 ms-5">
-            <input type="text" class="form-control search" placeholder="Search by keywords or location" aria-describedby="basic-addon2">
-            <span class="input-group-text px-4 bg-warning search pink" id="basic-addon2">Search</span>
-        </div>
+        <form action="{{ route('list') }}" method="GET">
+            <div class="input-group mb-3 mt-5 ms-5">
+                <input list="keyword" class="form-control search" name="searchData" placeholder="Search by keywords or location" aria-describedby="basic-addon2">
+                <datalist id="keyword">
+                    @foreach ($jobs as $job)
+                        <option value="{{ $job->job_title }}">
+                    @endforeach
+                </datalist>
+                <input type="submit" class="btn pink" value="Search">
+            </div>
+        </form>
     </div>
     <div class="col-5 img-slider">
         <img src="{{ asset('images/jobseeker.png') }}" class="img-fluid home-img">

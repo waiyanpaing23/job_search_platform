@@ -24,7 +24,7 @@
         <h2>Find the Perfect Candidates for Your Next Big Project!</h2>
         <p class="mt-4 subtext">Connect with skilled professionals who match your company’s needs. Start posting jobs today!</p>
         @if(Auth::check())
-            <a href="#" class="btn pink">Post Your Job</a>
+            <a href="{{ route('job.new') }}" class="btn pink">Post Your Job</a>
         @else
             <a href="{{ route('employer.login') }}" class="btn pink">Sign in as Employer</a>
         @endif

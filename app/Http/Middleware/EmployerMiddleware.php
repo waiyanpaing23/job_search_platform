@@ -15,12 +15,12 @@ class EmployerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
+
         if($request->user()->role == 'employer') {
             return $next($request);
         }
         else{
-            abort(404);
+            return back();
         }
     }
 }

@@ -24,6 +24,8 @@
                 <div class="col-4 py-4 px-5 bg-white mt-4 d-flex flex-column justify-content-center">
                     <h2 class="mb-4">Login as Employer</h2>
 
+                    <h4>Welcome Back!</h4>
+
                     <form method="POST" action="{{ route('employer.login') }}">
                         @csrf
 
@@ -33,7 +35,7 @@
                         <div class="mt-4">
 
                             <input class="form-control" type="email" name="email" value="{{ old('email') }}"
-                                placeholder="Enter Your Email" required>
+                                placeholder="Email Address" required>
                             @error('email')
                             <small class="text-sm text-danger">{{ $message }}</small>
                             @enderror
@@ -43,7 +45,7 @@
                         <div class="mt-4">
 
                             <input class="form-control" type="password" name="password"
-                                placeholder="Enter Your Password" required>
+                                placeholder="Password" required>
                             @error('password')
                             <small class="text-sm text-danger">{{ $message }}</small>
                             @enderror

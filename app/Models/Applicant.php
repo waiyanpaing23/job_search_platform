@@ -13,14 +13,11 @@ class Applicant extends Model
 
     protected $fillable = [
         'user_id',
-        'first_name',
-        'last_name',
         'gender',
         'phone',
         'address',
         'date_of_birth',
-        'resume',
-        'profile'
+        'resume'
     ];
 
     public function user():BelongsTo
