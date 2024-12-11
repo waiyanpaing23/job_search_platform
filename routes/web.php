@@ -3,7 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
 use App\Models\Job;
@@ -26,7 +30,8 @@ Route::get('/', function () {
     return view('user.dashboard', compact('jobs'));
 })->name('user.dashboard');
 
-Route::get('/search-job', [ApplicantController::class, 'list'])->name('list');
+Route::get('job/search', [ApplicantController::class, 'list'])->name('list');
+Route::get('job/{id}', [JobController::class, 'detail'])->name('job.detail');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -36,11 +41,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('profile/image/update', [ProfileController::class, 'updateImage'])->name('profile.image.update');
+    Route::get('profile/image/remove', [ProfileController::class, 'removeImage'])->name('profile.image.remove');
 
     // Route::get('home', [UserController::class, 'index'])->name('home')->middleware('user');
 
     Route::prefix('admin')->group( function() {
         Route::get('dashboard', [AdminController::class, 'index'])->name('admin')->middleware('admin');
+    });
+
+    Route::prefix('applicant')->middleware('applicant')->group( function() {
+        Route::get('profile', [ApplicantController::class, 'profile'])->name('applicant.profile');
+        Route::get('profile/edit', [ApplicantController::class, 'editProfile'])->name('applicant.profile.edit');
+        Route::post('profile/edit', [ApplicantController::class, 'updateProfile'])->name('applicant.profile.update');
+
+        Route::post('experience/create', [ExperienceController::class, 'create'])->name('experience.create');
+        Route::post('experience/update', [ExperienceController::class, 'update'])->name('experience.update');
+        Route::get('experience/delete/{id}', [ExperienceController::class, 'delete'])->name('experience.delete');
+
+        Route::post('education/create', [EducationController::class, 'create'])->name('education.create');
+        Route::post('education/update', [EducationController::class, 'update'])->name('education.update');
+        Route::get('education/delete/{id}', [EducationController::class, 'delete'])->name('education.delete');
+
+        Route::post('/skills/add', [SkillController::class, 'create'])->name('skill.create');
+        Route::get('/skills/delete/{id}', [SkillController::class, 'delete'])->name('skill.delete');
     });
 
 });

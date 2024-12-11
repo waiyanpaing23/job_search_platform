@@ -21,6 +21,8 @@ class Job extends Model
         'benefit',
         'min_salary',
         'max_salary',
+        'currency',
+        'salary_type',
         'expiry_date',
         'employer_id',
         'contact_email',

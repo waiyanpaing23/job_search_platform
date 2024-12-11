@@ -22,9 +22,9 @@
 
     <div class="employer-slider">
         <nav class="navbar navbar-expand-lg">
-            <div class="container d-flex justify-content-between py-2">
+            <div class="container d-flex justify-content-between">
                 <div>
-                    <a class="navbar-brand text-white h3" href="#">Pros<span class="text-info">Path</span></a>
+                    <a class="navbar-brand pros h3" href="#"><b>Pros</b><span class="path"><b>Path</b></span></a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -97,12 +97,14 @@
     </div>
 
 
-    @yield('content')
+    <div class="bg-light">
+        @yield('content')
+    </div>
 
     <footer>
         <div class="row p-5">
             <div class="col-3">
-                <a class="navbar-brand text-white h3" href="#">Pros<span class="text-info">Path</span></a>
+                <a class="navbar-brand text-white h3" href="#">Pros<span class="path">Path</span></a>
                 <p class="mt-2">Copyright &copy; 2024, ProsPath</p>
             </div>
             <div class="col-3">

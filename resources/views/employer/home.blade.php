@@ -4,16 +4,23 @@
 
 @section('styles')
 <style>
+    .pros{
+        color: white
+    }
+    .nav-link, .nav-employer{
+        color: white !important;
+        font-weight: 500 !important;
+    }
     .employer-slider {
         height: 550px;
         background-image: url('/images/employer.jpg');
         background-size: cover;
-        background-color: #3b445d;
+        background-color: #3b3b3b;
         background-blend-mode: multiply;
     }
-
     .navbar {
-        background-color: transparent;
+        background: transparent;
+        border: none !important;
     }
 </style>
 @endsection
@@ -37,17 +44,17 @@
     <h3 class="text-center mt-5 mb-4">Find the Right Talent, Quick and Easy</h3>
     <div class="row d-flex justify-content-center">
         <div class="col-3 p-5 userguide">
-            <i class="fa-solid fa-1 px-3 py-2 mb-4 rounded-circle bg-primary text-white h3"></i>
+            <i class="fa-solid fa-1 px-3 py-2 mb-4 rounded-circle bg-dark text-white h3"></i>
             <h5 class="mb-4">List Available Roles</h5>
             <p class="text-muted text-center">Easily share your job openings to reach the talent you need.</p>
         </div>
         <div class="col-3 p-5 userguide">
-            <i class="fa-solid fa-2 px-3 py-2 mb-4 rounded-circle bg-primary text-white h3"></i>
+            <i class="fa-solid fa-2 px-3 py-2 mb-4 rounded-circle bg-dark text-white h3"></i>
             <h5 class="mb-4">Seek Out Talent</h5>
             <p class="text-muted text-center">Explore skilled candidates ready to contribute to your goals.</p>
         </div>
         <div class="col-3 p-5 userguide">
-            <i class="fa-solid fa-3 px-3 py-2 mb-4 rounded-circle bg-primary text-white h3"></i>
+            <i class="fa-solid fa-3 px-3 py-2 mb-4 rounded-circle bg-dark text-white h3"></i>
             <h5 class="mb-4">Strengthen Your Workforce</h5>
             <p class="text-muted text-center">Bring in the best people to push your organization to new heights.</p>
         </div>

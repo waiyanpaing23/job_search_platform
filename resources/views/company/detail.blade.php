@@ -1,5 +1,16 @@
 @php
-    $layout = Auth::user()->role == 'employer' ? 'employer.layouts.master' : 'layouts.master';
+    $layout = 'layouts.master';
+
+    if (Auth::check() && Auth::user()->role) {
+        switch (Auth::user()->role) {
+            case 'employer':
+                $layout = 'employer.layouts.master';
+                break;
+            case 'admin':
+                $layout = 'admin.layouts.master';
+                break;
+        }
+    }
 @endphp
 
 @extends($layout)
@@ -8,7 +19,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-8 py-5">
 
-            <div class="border rounded px-5 py-4 shadow-sm">
+            <div class="border rounded px-5 py-4 bg-white shadow-sm">
 
                 <div class="d-flex">
                     <div>
@@ -49,10 +60,13 @@
             <div class="d-flex">
 
                 @foreach ($jobs as $job)
-                    <div class="job-opening pe-2 py-4">
-                        <div class="py-3 px-4 mb-4 border rounded shadow-sm">
+                    <div class="job-opening-section pe-2 py-4">
+                        <div class="py-3 px-4 mb-4 border rounded shadow-sm bg-white job-opening">
 
-                            <h4><b>{{ $job->job_title }}</b></h4>
+                            <a href="{{ route('job.detail', $job->id) }}" class="text-decoration-none text-dark link">
+                                <h4><b>{{ $job->job_title }}</b></h4>
+                            </a>
+
                             <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
                                 class="text-muted me-3">{{ $job->location }}</span>
                             <i class="fa-solid fa-briefcase me-2 text-muted"></i><span

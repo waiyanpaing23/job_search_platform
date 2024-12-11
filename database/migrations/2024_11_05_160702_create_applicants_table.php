@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->enum('gender', ['Male, Female, Others']);
-            $table->string('phone', 20);
+            $table->enum('gender', ['Male', 'Female', 'Others']);
+            $table->string('phone', 20)->nullable();
             $table->string('address', 200)->nullable();
-            $table->date('date_of_birth');
-            $table->string('resume', 200);
+            $table->date('date_of_birth')->nullable();
+            $table->text('about')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('portfolio_link')->nullable();
+            $table->string('resume', 200)->nullable();
+            $table->timestamps();
         });
     }
 

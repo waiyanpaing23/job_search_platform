@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('benefit')->nullable();
             $table->decimal('min_salary', 10, 2)->nullable();
             $table->decimal('max_salary', 10, 2)->nullable();
+            $table->string('currency')->nullable();
+            $table->string('salary_type')->nullable();
             $table->date('expiry_date')->nullable();
             $table->foreignId('employer_id')->constrained()->onDelete('cascade');
             $table->string('contact_email');

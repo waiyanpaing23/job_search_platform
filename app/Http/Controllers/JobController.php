@@ -17,7 +17,7 @@ class JobController extends Controller
         $categories = Category::all();
         $employer = Auth::user()->employer;
 
-        if($employer->company_id == null) {
+        if($employer?->company_id == null) {
 
             return to_route('employer.profile')->with([
                 'title' => "Link Your Profile to a Company",
@@ -25,9 +25,9 @@ class JobController extends Controller
             ]);
         }
 
-        $employer->load('company');
+        $employer?->load('company');
 
-        return view('employer.create', compact('categories', 'employer'));
+        return view('job.create', compact('categories', 'employer'));
     }
 
     public function store(Request $request) {
@@ -35,12 +35,27 @@ class JobController extends Controller
 
         $data = $this->requestJobData($request);
 
-        Job::create($data);
+        $job = Job::create($data);
 
-        return to_route('employer')->with([
+        return to_route('job.detail', ['id' => $job->id])->with([
             'title' => 'Job Posted Successfully!',
             'message' => 'Your job post has been created successfully. You can view or manage your job posts in [ My Jobs ].'
         ]);
+    }
+
+    public function detail($id) {
+        $job = Job::where('id', $id)->first();
+
+        $related_jobs = Job::where('category_id', $job->category_id)
+                   ->where('id', '!=', $job->id)
+                   ->latest()
+                   ->limit(3)
+                   ->get();
+
+        $requirements = array_filter(explode(';', $job->requirement ));
+        $benefits = array_filter(explode(';', $job->benefit));
+
+        return view('job.detail', compact('job', 'requirements', 'benefits', 'related_jobs'));
     }
 
     private function validateJobPost($request) {
@@ -72,6 +87,8 @@ class JobController extends Controller
             'category_id' => $request->category,
             'min_salary' => $request->minSalary,
             'max_salary' => $request->maxSalary,
+            'currency' => $request->currency,
+            'salary_type' => $request->salaryType,
             'expiry_date' => $request->expiryDate,
             'employer_id' => $employerData->id,
             'contact_email' => $request->contactEmail,

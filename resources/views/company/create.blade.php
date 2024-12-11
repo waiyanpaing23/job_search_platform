@@ -17,7 +17,7 @@
                                 <label class="mt-3"><b>Company Logo</b></label>
                                 <img src="{{ asset('images/default_image.png') }}" class="mt-2 logo-create" name="logo"
                                     id="image">
-                                <input type="file" class="form-control mt-2" name="image" onchange="loadFile(event)">
+                                <input type="file" class="form-control mt-2 input-file" name="image" onchange="loadFile(event)">
                                 @error('image')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror

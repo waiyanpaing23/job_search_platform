@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
         Route::get('link/{id}', [CompanyController::class, 'link'])->name('company.link');
         Route::get('edit', [CompanyController::class, 'edit'])->name('company.edit');
         Route::post('edit', [CompanyController::class, 'update'])->name('company.update');
-        Route::get('{id}', [CompanyController::class, 'detail'])->name('company.detail');
     });
 });
+
+Route::get('company/{id}', [CompanyController::class, 'detail'])->name('company.detail');

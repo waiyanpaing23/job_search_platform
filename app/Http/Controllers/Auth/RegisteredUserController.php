@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Applicant;
+use App\Models\Education;
 use App\Models\Employer;
+use App\Models\Experience;
+use App\Models\Skill;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -36,7 +40,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'lastname' => ['max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
@@ -51,7 +55,7 @@ class RegisteredUserController extends Controller
             ]);
 
             Employer::create([
-                'user_id' => $user->id,
+                'user_id' => $user->id
             ]);
 
             event(new Registered($user));
@@ -66,6 +70,11 @@ class RegisteredUserController extends Controller
             'last_name' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        Applicant::create([
+            'gender' => $request->gender,
+            'user_id' => $user->id,
         ]);
 
         event(new Registered($user));

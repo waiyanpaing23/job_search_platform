@@ -80,7 +80,7 @@
                         Search for jobs that suit your interests and skills.
                     </h3>
                     <div class="row reg-logo d-flex align-items-end">
-                        <a class="navbar-brand text-white h3 ms-1" href="#">Pros<span class="text-info">Path</span></a>
+                        <a class="navbar-brand pros h3 ms-1" href="#"><b>Pros</b><span class="path"><b>Path</b></span></a>
                     </div>
                 </div>
 

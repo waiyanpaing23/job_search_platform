@@ -1,11 +1,11 @@
 @extends('employer/layouts/master')
 
 @section('content')
-    <div class="container p-5">
+    <div class="container-fluid p-5">
 
         <div class="px-5">
-            <h4><b>Post New Job</b></h4>
-            <div class="border rounded p-4 mt-3">
+            <h5><b>Post New Job</b></h5>
+            <div class="shadow-sm rounded bg-white p-4 mt-3">
                 <form action="{{ route('job.store') }}" method="POST">
                     @csrf
                     <div class="row">
@@ -51,15 +51,41 @@
                         <div class="col-6">
                             <label for="salary"><b>Salary</b></label>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-3">
                                     <input type="text" name="minSalary" placeholder="Min:" class="form-control mt-2 input-box @error('salary') is-invalid @enderror">
                                     @error('minSalary')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-6">
+                                <div class="col-3">
                                     <input type="text" name="maxSalary" placeholder="Max:" class="form-control mt-2 input-box @error('salary') is-invalid @enderror">
                                     @error('maxSalary')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-3">
+                                    <select name="currency" class="input-box rounded px-3 mt-2 w-100 @error('currency') is-invalid @enderror">
+                                        <option value="$">$</option>
+                                        <option value="€">€</option>
+                                        <option value="GBP">GBP</option>
+                                        <option value="THB">THB</option>
+                                        <option value="S$">S$</option>
+                                        <option value="KRW">KRW</option>
+                                        <option value="MMK">MMK</option>
+                                    </select>
+                                    @error('currency')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-3">
+                                    <select name="salaryType" class="input-box rounded px-3 mt-2 w-100 @error('salaryType') is-invalid @enderror">
+                                        <option value="">per</option>
+                                        <option value="per hour">per hour</option>
+                                        <option value="per day">per day</option>
+                                        <option value="per month">per month</option>
+                                        <option value="per year">per year</option>
+                                    </select>
+                                    @error('salaryType')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

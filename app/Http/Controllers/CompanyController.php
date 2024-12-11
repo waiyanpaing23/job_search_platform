@@ -104,7 +104,7 @@ class CompanyController extends Controller
     }
 
     public function detail($id) {
-        $company = Company::find($id)->first();
+        $company = Company::where('id', $id)->first();
         $jobs = Job::whereHas('employer', function ($query) use ($id) {
             $query->where('id', $id);
         })->get();

@@ -1,7 +1,7 @@
 @extends('employer/layouts/master')
 
 @section('content')
-    <div class="container p-5">
+    <div class="container-fluid bg-light p-5">
 
         <div class="row d-flex justify-content-center">
 
@@ -56,9 +56,9 @@
 
                 <a href="{{ route('employer.profile') }}" class="text-dark"><i class="fa-solid fa-arrow-left h3"></i></a>
 
-                <h3 class="my-4"><b>Edit Profile</b></h3>
+                <h4 class="my-4"><b>Edit Profile</b></h4>
 
-                <div class="p-4 border rounded">
+                <div class="p-4 shadow-sm rounded bg-white">
 
                     <h5><b>Manage Your Personal Information</b></h5>
 
@@ -68,15 +68,21 @@
                         <input type="hidden" name="oldImage" value="{{ Auth::user()->profile_image }}">
 
                         <div class="row">
-                            <div class="col-6 d-flex flex-column">
+                            <div class="col-2 d-flex flex-column">
                                 <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
                                     class="my-3 profile-edit rounded-circle" name="profile" id="image">
-
-                                <input type="file" class="form-control input-file py-2 my-4" name="image"
+                            </div>
+                            <div class="col d-flex align-items-center">
+                                <div>
+                                    <input type="file" class="form-control input-file py-2 my-4 mx-3" name="image"
                                     onchange="loadFile(event)">
-                                @error('profile')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                    @error('profile')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <a href="{{ route('profile.image.remove') }}" class="btn btn-danger ms-4">
+                                    <i class="fa-solid fa-trash"></i> Remove
+                                </a>
                             </div>
                         </div>
 
@@ -103,7 +109,7 @@
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <label for="position" class="mb-1 fw-semibold">Job Position</label>
-                                <input type="text" value="{{ $employer->position }}"
+                                <input type="text" value="{{ $employer?->position?$employer->position : '' }}"
                                     class="input-box rounded w-100 px-3 mb-3" id="position" name="position">
                                 @error('position')
                                     <small class="text-danger">{{ $message }}</small>
@@ -123,7 +129,7 @@
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <label for="phone" class="mb-1 fw-semibold">Phone Number</label>
-                                <input type="text" value="{{ $employer->phone }}"
+                                <input type="text" value="{{ $employer?->phone ? $employer->phone : '' }}"
                                     class="input-box rounded w-100 px-3 mb-3" id="phone" name="phone">
                                 @error('phone')
                                     <small class="text-danger">{{ $message }}</small>

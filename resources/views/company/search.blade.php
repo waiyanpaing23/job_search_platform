@@ -26,7 +26,7 @@
                                     class="img-fluid rounded"><br>
                             </div>
                             <div class="col">
-                                <a href="{{ route('company.detail', $company->id) }}" class="text-decoration-none text-black company-link">
+                                <a href="{{ route('company.detail', $company->id) }}" class="text-decoration-none text-black link">
                                     <h5><b>{{ $company->company_name }}</b></h5>
                                 </a>
                                 <p class="text-muted">{{ $company->industry }}</p>

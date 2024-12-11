@@ -91,7 +91,7 @@
                         Find the talent you need to elevate your team.
                     </h3>
                     <div class="row reg-logo d-flex align-items-end">
-                        <a class="navbar-brand text-white h3 ms-1 mb-3" href="#">Pros<span class="text-info">Path</span></a>
+                        <a class="navbar-brand pros h3 ms-1 mb-3" href="#"><b>Pros</b><span class="path"><b>Path</b></span></a>
                     </div>
                 </div>
             </div>

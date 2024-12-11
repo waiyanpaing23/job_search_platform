@@ -66,82 +66,81 @@
 
 <body>
 
-    <div class="container-fluid bg-blue text-dark">
-        <div class="row p-5">
+    <div class="container-fluid bg-blue text-dark d-flex justify-content-center align-items-center">
 
-            <div class="zero-margin d-flex justify-content-center m-5">
+        <div class="row pt-4 zero-margin d-flex">
 
-                <div class="col-4 py-4 px-5 bg-white mt-4">
-                    <h2 class="mb-4">Login</h2>
-                    <h5>Welcome Back!</h5>
+            <div class="col-12 col-lg-6 py-4 px-5 bg-white">
+                <h2 class="mb-4">Login</h2>
+                <h5>Welcome Back!</h5>
 
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
 
-                        <input type="hidden" value="employer" name="role">
+                    <input type="hidden" value="employer" name="role">
 
-                        <!-- Email Address -->
-                        <div class="mt-4">
+                    <!-- Email Address -->
+                    <div class="mt-4">
 
-                            <input class="form-control" type="email" name="email" value="{{ old('email') }}"
-                                placeholder="Email Address" required>
-                            @error('email')
+                        <input class="form-control" type="email" name="email" value="{{ old('email') }}"
+                            placeholder="Email Address" required>
+                        @error('email')
                             <small class="text-sm text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                        @enderror
+                    </div>
 
-                        <!-- Password -->
-                        <div class="mt-4">
+                    <!-- Password -->
+                    <div class="mt-4">
 
-                            <input class="form-control" type="password" name="password"
-                                placeholder="Password" required>
-                            @error('password')
+                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        @error('password')
                             <small class="text-sm text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                        @enderror
+                    </div>
 
-                        <!-- Remember Me -->
-                        <div class="mt-4">
-                            <label for="remember_me" class="inline-flex items-center">
-                                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                            </label>
-                        </div>
+                    <!-- Remember Me -->
+                    <div class="mt-4">
+                        <label for="remember_me" class="inline-flex items-center">
+                            <input id="remember_me" type="checkbox"
+                                class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
+                                name="remember">
+                            <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                        </label>
+                    </div>
 
-                        <div class="">
-                            @if (Route::has('password.request'))
+                    <div class="">
+                        @if (Route::has('password.request'))
                             <a class="text-decoration-none" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
-                            @endif
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="mt-4">
-                            <input type="submit" class="btn pink w-100" value="Login">
-                        </div>
-
-                        <!-- Link to Login -->
-                        <div class="mt-4">
-                            <p>Don't have an account? <a href="{{ route('register') }}">Register now.</a></p>
-                        </div>
-                    </form>
-                    <hr class="my-4">
-                    <a href="{{ url('/auth/google/redirect') }}" class="text-decoration-none">
-                        <div class="google d-flex justify-content-center align-items-center p-1 rounded">
-                            <img src="{{ asset('images/google.png') }}" class="me-4">
-                            <span class="text-black">Sign in with Google</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-4 register-img mt-4">
-                    <h3 class="cover-text text-white">
-                        Search for jobs that suit your interests and skills.
-                    </h3>
-                    <div class="row reg-logo d-flex align-items-end">
-                        <a class="navbar-brand text-white h3 ms-1 mb-3" href="#">Pros<span class="text-info">Path</span></a>
+                        @endif
                     </div>
+
+                    <!-- Submit Button -->
+                    <div class="mt-4">
+                        <input type="submit" class="btn pink w-100" value="Login">
+                    </div>
+
+                    <!-- Link to Login -->
+                    <div class="mt-4">
+                        <p>Don't have an account? <a href="{{ route('register') }}">Register now.</a></p>
+                    </div>
+                </form>
+                <hr class="my-4">
+                <a href="{{ url('/auth/google/redirect') }}" class="text-decoration-none">
+                    <div class="google d-flex justify-content-center align-items-center p-1 rounded">
+                        <img src="{{ asset('images/google.png') }}" class="me-4">
+                        <span class="text-black">Sign in with Google</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-lg-6 register-img border border-2">
+                <h3 class="cover-text text-white">
+                    Search for jobs that suit your interests and skills.
+                </h3>
+                <div class="row reg-logo d-flex align-items-end">
+                    <a class="navbar-brand pros h3 ms-1 mb-3" href="#"><b>Pros</b><span class="path"><b>Path</b></span></a>
                 </div>
             </div>
         </div>
