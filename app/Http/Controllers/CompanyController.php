@@ -112,6 +112,31 @@ class CompanyController extends Controller
         return view('company.detail', compact('company', 'jobs'));
     }
 
+    public function list() {
+        // $jobs = Job::with('employer.company')
+        //         ->when(request('searchData'), function($query) {
+        //             $query->whereAny(['job_title'],'like','%'.request('searchData').'%');
+        //         })
+        //         ->when(request('category'), function($query) {
+        //             $query->where('category_id', request('category'));
+        //         })
+        //         ->when(request('job_type'), function($query) {
+        //             $query->where('job_type', request('job_type'));
+        //         })
+        //         ->paginate(8);
+        $companies = Company::withCount('jobs')
+                    ->when(request('searchData'), function($query) {
+                        $query->whereAny(['company_name', 'location'],'like','%'.request('searchData').'%');
+                    })
+                    ->when(request('category'), function($query) {
+                        $query->where('industry', request('category'));
+                    })
+                    ->get();
+        $categories = Category::all();
+
+        return view('user.companies', compact('companies', 'categories'));
+    }
+
     private function validateCompanyData($request, $action) {
         $request->validate([
             'image' => $action == 'create'? 'required':'',

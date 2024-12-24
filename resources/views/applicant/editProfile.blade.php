@@ -5,22 +5,25 @@
 
         <div class="row d-flex justify-content-center">
 
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-9">
 
                 <a href="{{ route('applicant.profile') }}" class="text-dark"><i class="fa-solid fa-arrow-left h3"></i></a>
 
-                <h4 class="my-3"><b>Edit Profile</b></h4>
 
-                <div class="px-4 py-2 border border-radius bg-white">
+                <div class="border border-radius bg-white mt-3">
+
+                    <h4 class="p-4 bg-dark text-white header"><b>Edit Profile</b></h4>
+
                     <div class="row">
 
                         <div class="row d-flex align-items-center">
                             <div class="col-2">
                                 <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
-                                    class="img-fluid rounded-circle profile my-4" id="image"><br>
+                                    class="img-fluid rounded-circle profile my-4" id="profile"><br>
                             </div>
                             <div class="col-5 ms-1">
-                                <form action="{{ route('profile.image.update') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('profile.image.update') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="oldImage" value="{{ Auth::user()->profile_image }}">
                                     <input type="file" class="input-file form-control" name="profile"
@@ -44,7 +47,7 @@
                     <form action="{{ route('applicant.profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="btn-group bg-white" role="group" aria-label="Basic radio toggle button group">
+                        <div class="btn-group bg-white w-100" role="group" aria-label="Basic radio toggle button group">
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
                                 checked>
                             <label class="btn tab" for="btnradio1">About</label>
@@ -93,11 +96,26 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 col-sm-6">
                                     <label for="name" class="mb-2 fw-semibold">Phone Number</label>
                                     <input type="text" value="{{ $applicant->phone }}" name="phone"
                                         class="form-control input-box rounded w-100 px-3 mb-4">
                                     {{-- <p>{{ $applicant->phone ? $applicant->phone : '-' }}</p> --}}
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <label for="name" class="mb-2 fw-semibold">Location</label>
+                                    <input type="text" value="{{ $applicant->address }}" name="address"
+                                        class="form-control input-box rounded w-100 px-3 mb-4">
+                                    {{-- <p>{{ $applicant->phone ? $applicant->phone : '-' }}</p> --}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="name" class="mb-2 fw-semibold">Bio</label>
+                                    <input type="text"value="{{ $applicant->bio }}" name="bio"
+                                        class="form-control input-box rounded w-100 px-3 mb-4">
                                 </div>
                             </div>
 
@@ -314,9 +332,9 @@
 
                     <div class="content p-4 border rounded bg-white mt-3" id="skillsContent">
                         <h4 class="fw-bold mb-4">Skills</h4>
-                        <div class="skills mb-4 px-3">
+                        <div class="skills mb-4 px-3" id="applicant_skills">
                             @foreach ($applicant->skills as $skill)
-                                <div class="py-1 px-3 me-2 rounded-pill">
+                                <div class="py-1 px-3 me-2 mb-3 rounded-pill bg-cyan">
                                     <span>{{ $skill->skill }}</span>
                                     <a href="{{ route('skill.delete', $skill->id) }}" class="text-decoration-none"><i
                                             class="fa-solid fa-xmark text-dark"></i></a>
@@ -325,20 +343,19 @@
                         </div>
                         <div class="row">
                             <div class="col-7">
-                                <form action="{{ route('skill.create') }}" method="POST">
-                                    @csrf
-                                    <div>
-                                        <select name="skills[]" id="skills"
-                                            class="input-box rounded w-75 px-3 @error('skills') is-invalid @enderror multiple">
-                                            <option value="">Add Skills</option>
-                                            @foreach ($skills as $skill)
-                                                <option value="{{ $skill->id }}">{{ $skill->skill }}</option>
-                                            @endforeach
-                                        </select>
-                                        <button type="submit" class="btn pink mb-2 py-1 pt-2"><i
-                                                class="fa-solid fa-plus me-2"></i> Add</button>
-                                    </div>
-                                </form>
+                                {{-- <form action="/applicant/skills/add" method="POST"> --}}
+                                {{-- @csrf --}}
+                                <div>
+                                    <select name="skills" id="skills" class="input-box px-2 rounded">
+                                        <option value="0">Add Skills</option>
+                                        @foreach ($skills as $skill)
+                                            <option value="{{ $skill->id }}">{{ $skill->skill }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" id="add_skills" class="btn pink mb-2 py-1 pt-2"><i
+                                            class="fa-solid fa-plus me-2"></i> Add</button>
+                                </div>
+                                {{-- </form> --}}
                             </div>
                         </div>
                     </div>
@@ -488,37 +505,51 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
-            // Bind form submission to AJAX
-            $('#skillsForm').submit(function(e) {
-                e.preventDefault(); // Prevent the form from submitting normally
 
-                // Get the selected skills from the form
-                var selectedSkills = $('#skills').val();
+        $(document).on('click', '#add_skills', function() {
+            let selectedSkills = $('#skills').val();
 
-                // Send an AJAX POST request
+            function ajaxSkills() {
                 $.ajax({
-                    url: "/applicant/skills/add", // The route to your Laravel controller
                     type: 'POST',
+                    url: "/applicant/skills/add",
                     data: {
-                        _token: $('input[name="_token"]').val(), // Include CSRF token
+                        _token: '{{ csrf_token() }}', // Include CSRF token
                         skills: selectedSkills // Send the selected skills array
                     },
                     success: function(response) {
                         // Handle the response from the server
-                        if (response.success) {
-                            // Optionally update the page, like clearing the form or updating the UI
-                            $('#skills').val([]); // Clear the selection
-                        } else {
-                            alert('Error adding skills.');
-                        }
+                        // if (response.success) {
+                        // Optionally update the page, like clearing the form or updating the UI
+                        $('#skills').val([]); // Clear the selection
+                        // let skills_html = [];
+                        let skills_html = [];
+                        let new_skills = response.skills;
+
+                        new_skills.forEach(skill => {
+                            skills_html += `
+                            <div class="py-1 px-3 me-2 rounded-pill bg-cyan">
+                                <span>${skill.skill}</span>
+                                <a href="{{ route('skill.delete', $skill->id) }}" class="text-decoration-none"><i
+                                        class="fa-solid fa-xmark text-dark"></i></a>
+                            </div>
+                        `;
+                        });
+
+                        $('#applicant_skills').html(skills_html);
+                        console.log('successful');
+                        // }
+
                     },
-                    error: function(xhr, status, error) {
-                        // Handle error (optional)
-                        alert('An error occurred while adding skills.');
-                    }
+                    // error: function(xhr, status, error) {
+                    //     // Handle error (optional)
+                    //     alert('An error occurred while adding skills.');
+                    // }
                 });
-            });
+            }
+
+            ajaxSkills();
+
         });
 
         document.addEventListener('DOMContentLoaded', function() {

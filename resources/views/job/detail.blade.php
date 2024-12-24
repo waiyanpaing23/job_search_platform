@@ -40,7 +40,13 @@
                         </div>
                     </div>
 
-                    <a href="" class="btn pink">Apply Now</a>
+                    @if (Auth::check() && Auth::user()->role == 'user')
+                        <a href="{{ route('application', $job->id) }}" class="btn pink">Apply Now</a>
+                    @elseif (Auth::check() && Auth::user()->role == 'employer' )
+                        {{ '' }}
+                    @else
+                        <a href="{{ route('login') }}" class="btn pink">Login to Apply</a>
+                    @endif
                 </div>
 
             </div>

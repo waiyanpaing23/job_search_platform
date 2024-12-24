@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\JobController;
@@ -24,11 +26,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $jobs = Job::all();
+// Route::get('/', function () {
+//     $jobs = Job::all();
 
-    return view('user.dashboard', compact('jobs'));
-})->name('user.dashboard');
+//     return view('user.dashboard', compact('jobs'));
+// })->name('user.dashboard');
+
+Route::get('/', [ApplicantController::class, 'index'])->name('user.dashboard');
 
 Route::get('job/search', [ApplicantController::class, 'list'])->name('list');
 Route::get('job/{id}', [JobController::class, 'detail'])->name('job.detail');
@@ -43,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('profile/image/update', [ProfileController::class, 'updateImage'])->name('profile.image.update');
     Route::get('profile/image/remove', [ProfileController::class, 'removeImage'])->name('profile.image.remove');
+
+    Route::get('job/{id}/application', [ApplicationController::class, 'application'])->name('application');
+    ROute::post('job/{id}/application/submit', [ApplicationController::class, 'submitApplication'])->name('application.submit');
 
     // Route::get('home', [UserController::class, 'index'])->name('home')->middleware('user');
 
@@ -65,6 +72,11 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/skills/add', [SkillController::class, 'create'])->name('skill.create');
         Route::get('/skills/delete/{id}', [SkillController::class, 'delete'])->name('skill.delete');
+
+        Route::get('applications', [ApplicationController::class, 'list'])->name('application.list');
+        Route::get('applications/{id}', [ApplicationController::class, 'detail'])->name('application.detail');
+        Route::get('application/{id}/withdraw', [ApplicationController::class, 'withdraw'])->name('application.withdraw');
+
     });
 
 });

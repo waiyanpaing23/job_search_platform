@@ -65,11 +65,11 @@
                                 </div>
                                 <div class="col-3">
                                     <select name="currency" class="input-box rounded px-3 mt-2 w-100 @error('currency') is-invalid @enderror">
-                                        <option value="$">$</option>
-                                        <option value="€">€</option>
+                                        <option value="$">USD</option>
+                                        <option value="€">EUR</option>
                                         <option value="GBP">GBP</option>
                                         <option value="THB">THB</option>
-                                        <option value="S$">S$</option>
+                                        <option value="S$">SGD</option>
                                         <option value="KRW">KRW</option>
                                         <option value="MMK">MMK</option>
                                     </select>
@@ -79,7 +79,6 @@
                                 </div>
                                 <div class="col-3">
                                     <select name="salaryType" class="input-box rounded px-3 mt-2 w-100 @error('salaryType') is-invalid @enderror">
-                                        <option value="">per</option>
                                         <option value="per hour">per hour</option>
                                         <option value="per day">per day</option>
                                         <option value="per month">per month</option>

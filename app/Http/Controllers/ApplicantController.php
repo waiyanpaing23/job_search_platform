@@ -4,22 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use App\Models\Category;
-use App\Models\Education;
-use App\Models\Experience;
+use App\Models\Company;
 use App\Models\Job;
 use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApplicantController extends Controller
 {
+
+    public function index() {
+        $jobs = Job::all();
+        $industries = Category::leftJoin('jobs', 'categories.id', '=', 'jobs.category_id')
+                    ->select('categories.category', DB::raw('COUNT(jobs.id) as job_count'))
+                    ->groupBy('categories.id', 'categories.category')
+                    ->orderByDesc('job_count')
+                    ->limit(4)
+                    ->get();
+        $recommendations = $this->jobRecommendations();
+
+        $companies = Company::inRandomOrder()->limit(4)->get();
+
+        return view('user.dashboard', compact('jobs', 'industries', 'recommendations', 'companies'));
+    }
+
     public function list() {
         $categories = Category::all();
 
         $jobs = Job::with('employer.company')
                 ->when(request('searchData'), function($query) {
-                    $query->whereAny(['job_title', 'job_type', 'category_id'],'like','%'.request('searchData').'%');
+                    $query->whereAny(['job_title', 'location'],'like','%'.request('searchData').'%');
                 })
                 ->when(request('category'), function($query) {
                     $query->where('category_id', request('category'));
@@ -33,11 +49,13 @@ class ApplicantController extends Controller
     }
 
     public function profile() {
+        $recommendations = $this->jobRecommendations();
+
         $applicant = Auth::user()->applicant;
         $experiences = $applicant->experiences;
         $educations = $applicant->educations;
 
-        return view('applicant.profile', compact('applicant', 'experiences', 'educations'));
+        return view('applicant.profile', compact('applicant', 'experiences', 'educations', 'recommendations'));
     }
 
     public function editProfile() {
@@ -61,6 +79,8 @@ class ApplicantController extends Controller
         $applicantData = [
             'date_of_birth' => $request->dateofbirth,
             'phone' => $request->phone,
+            'address' => $request->address,
+            'bio' => $request->bio,
             'about' => $request->about,
             'linkedin' => $request->linkedin,
             'github' => $request->github,
@@ -87,5 +107,44 @@ class ApplicantController extends Controller
             'firstname' => 'required',
             'email' => 'required|unique:users,email,'.Auth::user()->id
         ]);
+    }
+
+    private function jobRecommendations() {
+
+        if(Auth::check()) {
+            $applicant = Auth::user()->applicant;
+
+            $keywords = [];
+
+            if ($applicant->bio) {
+                $keywords = array_merge($keywords, explode(' ', $applicant->bio));
+            }
+
+            if ($applicant->about) {
+                $keywords = array_merge($keywords, explode(' ', $applicant->about));
+            }
+            if($applicant->skills) {
+                $skills = $applicant->skills->pluck('name')->toArray();
+                $keywords = array_merge($keywords, $skills);
+            }
+
+            $keywords = array_filter($keywords, function ($value) {
+                return !empty($value);
+            });
+
+            $keywords = array_unique(array_filter($keywords));
+            $keywordsString = implode(' ', $keywords);
+
+            if (!empty($keywordsString)) {
+                $recommendations = Job::whereRaw("MATCH(job_title, requirement) AGAINST (? IN NATURAL LANGUAGE MODE)", [$keywordsString])
+                    ->limit(4)->get();
+            } else {
+                $recommendations = Job::inRandomOrder()->limit(4)->get();
+            }
+        } else {
+            $recommendations = '';
+        }
+
+        return $recommendations;
     }
 }

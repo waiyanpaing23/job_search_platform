@@ -2,6 +2,11 @@
     --primary: rgb(0, 150, 150);
     --secondary: rgb(21, 21, 21);
 }
+div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
 nav{
     border-bottom: 1px solid #d5d5d5;
 }
@@ -12,7 +17,7 @@ p, label{
     font-size: 15px !important;
 }
 .pros{
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255) !important;
 }
 .path{
     color: var(--primary);
@@ -62,6 +67,9 @@ input:focus{
     height: 45px !important;
     background-color: rgb(255, 255, 255);
 }
+.industries{
+    min-height: fit-content;
+}
 .input-group-text{
     cursor: pointer;
 }
@@ -73,15 +81,23 @@ input:focus{
 .pink{
     background-color: var(--primary) !important;
     color: white;
+    font-weight: 400;
 }
-.bg-custom{
-    background-color: #eef2e6;
+.bg-dark{
+    background-color: var(--secondary) !important;
+}
+.header{
+    border-radius: 15px 15px 0 0;
 }
 .border-radius{
     border-radius: 15px;
 }
 .text-custom{
     color: var(--primary);
+}
+.custom-font{
+    font-size: 18px !important;
+    margin: 0 0 8px 0 !important;
 }
 .employer-reg{
     text-align: center;
@@ -92,7 +108,7 @@ input:focus{
     height: 200px;
 }
 .company-logo{
-    width: 100px;
+    width: auto;
     height: 100px;
 }
 .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
@@ -112,7 +128,10 @@ input:focus{
     display: flex;
     flex-wrap: wrap;
 }
-.skills div{
+.bg-custom{
+    background-color: #f7f7f7;
+}
+.bg-cyan{
     background-color: rgba(0, 139, 139, 0.4);
 }
 .addexp{
@@ -196,6 +215,10 @@ footer .row{
 .input-box{
     height: 40px;
 }
+.search-box{
+    border: 1px solid #aaa;
+    padding: 10px 15px;
+}
 textarea, .category-filter, .input-file, .input-box{
     border: 1px solid #c0c0c0 !important;
     background-color: rgba(255, 255, 255, 0.1) !important;
@@ -237,6 +260,9 @@ textarea:focus, .input-box:focus{
     max-height: 400px;
     overflow-y: auto;
 }
+.company-container{
+    min-height: 110px;
+}
 .company{
     height: 100px;
 }
@@ -251,8 +277,14 @@ textarea:focus, .input-box:focus{
     height: 100px;
     width: fit-content;
 }
+.nav-profile{
+    height: 30px;
+    width: 30px;
+    border: 1px solid #aaa;
+    object-fit: cover;
+}
 .profile{
-    height: 90px;
+    height: 100px;
     width: 100px;
     object-fit: cover;
 }
@@ -264,7 +296,7 @@ textarea:focus, .input-box:focus{
 .company-info{
     font-size: 14px;
     font-weight: 600;
-    background-color: #c5c5c5;
+    background-color: rgba(0, 139, 139, 0.4);
     border-radius: 20px;
     padding: 5px 15px;
 }
@@ -281,10 +313,16 @@ textarea:focus, .input-box:focus{
     padding: 6px 14px;
     font-size: large;
     font-weight: 600;
-    background-color: #aaaaaa;
+    background-color: rgba(0, 139, 139, 0.4);;
 }
 ul{
     margin: 5px !important;
+}
+.table tbody tr td {
+    padding: 20px 0 !important;
+}
+.applicant-list span{
+    line-height: 10px !important;
 }
 @media(max-width:1000px) {
     .img-slider{

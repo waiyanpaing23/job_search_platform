@@ -18,12 +18,12 @@ class Applicant extends Model
         'phone',
         'address',
         'date_of_birth',
+        'bio',
         'about',
         'linkedin',
         'github',
         'twitter',
-        'portfolio_link',
-        'resume'
+        'portfolio_link'
     ];
 
     public function user():BelongsTo

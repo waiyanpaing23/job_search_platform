@@ -109,7 +109,7 @@
                             <div class="ps-1">
                                 <div class="">
                                     <input class="form-control ms-1" type="text" name="lastname" value="{{ old('lastname') }}"
-                                    placeholder="Last Name" required autofocus>
+                                    placeholder="Last Name" autofocus>
                                     @error('lastname')
                                     <small class="text-sm text-danger">{{ $message }}</small>
                                     @enderror

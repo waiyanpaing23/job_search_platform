@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
-            $table->id();
-            $table->text('skill')->nullable();
-            $table->timestamps();
+        Schema::table('skills', function (Blueprint $table) {
+            $table->fullText('skill');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::table('skills', function (Blueprint $table) {
+            $table->dropFullText('skill');
+        });
     }
 };

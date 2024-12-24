@@ -15,7 +15,17 @@ return new class extends Migration
             $table->id();
             $table->foreignId('job_id')->constrained()->onDelete('cascade');
             $table->foreignId('applicant_id')->constrained()->onDelete('cascade');
-            $table->enum('status',['Pending','Accepted','Rejected'])->default('Pending');
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('phone');
+            $table->string('email');
+            $table->string('resume');
+            $table->string('portfolio_link')->nullable();
+            $table->text('coverletter')->nullable();
+            $table->text('interest')->nullable();
+            $table->string('expected_salary')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

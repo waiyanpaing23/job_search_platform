@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('address', 200)->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->text('bio')->nullable();
             $table->text('about')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('github')->nullable();
             $table->string('twitter')->nullable();
             $table->string('portfolio_link')->nullable();
-            $table->string('resume', 200)->nullable();
             $table->timestamps();
         });
     }

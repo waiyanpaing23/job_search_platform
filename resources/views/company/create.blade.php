@@ -98,8 +98,8 @@
                                     <option value="51-100">51-100</option>
                                     <option value="100-200">100-200</option>
                                     <option value="200-500">200-500</option>
-                                    <option value="500+">500-1000</option>
-                                    <option value="500+">1000+</option>
+                                    <option value="500-1000">500-1000</option>
+                                    <option value="1000+">1000+</option>
                                 </select>
                                 @error('company_size')
                                     <small class="text-danger">{{ $message }}</small>

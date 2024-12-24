@@ -51,7 +51,7 @@
                             </ul>
                         </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Explore Companies</a>
+                            <a class="nav-link" href="{{route('companies')}}">Explore Companies</a>
                         </li>
 
                     </ul>
@@ -61,12 +61,17 @@
                 @if(Auth::check())
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle px-3 border border-secondary rounded" role="button"
+                        <a href="#" class="nav-link px-3" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->first_name }}
+                            <div class="d-flex align-items-center">
+                                <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
+                                    class="img-fluid rounded-circle nav-profile me-3">
+                                {{ Auth::user()->first_name }}
+                            </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('applicant.profile') }}"><i class="fa-solid fa-user me-2"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('application.list') }}"><i class="fa-solid fa-briefcase me-2"></i> My Applications</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -93,7 +98,7 @@
     @yield('heading')
 </div>
 
-    <div class="bg-light">
+    <div class="bg-custom">
         @yield('content')
     </div>
 
@@ -156,12 +161,11 @@
 @endif
 
 <script>
-
     function loadFile(event) {
         var reader = new FileReader();
 
         reader.onload = function() {
-            var output = document.getElementById('image');
+            var output = document.getElementById('profile');
             output.src = reader.result;
         }
 

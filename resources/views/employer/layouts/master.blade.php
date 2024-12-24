@@ -52,7 +52,7 @@
                                 <a class="nav-link" href="">My Jobs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Applicants</a>
+                                <a class="nav-link" href="{{ route('applicant.list') }}">Applicants</a>
                             </li>
 
                         </ul>
@@ -62,8 +62,10 @@
                     @if (Auth::check())
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle border border-secondary rounded px-3" href="#"
+                                <a class="nav-link dropdown-toggle px-3" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
+                                    class="img-fluid rounded-circle nav-profile me-2">
                                     {{ Auth::user()->first_name }}
                                 </a>
                                 <ul class="dropdown-menu">
@@ -97,7 +99,7 @@
     </div>
 
 
-    <div class="bg-light">
+    <div class="bg-custom">
         @yield('content')
     </div>
 

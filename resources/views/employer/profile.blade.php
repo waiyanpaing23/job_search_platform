@@ -84,13 +84,13 @@
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <label for="name" class="mb-1 fw-semibold">First Name</label>
-                            <input type="text" value="{{ Auth::user()->first_name }}" class="form-control rounded w-100 px-3 mb-4"
+                            <input type="text" value="{{ Auth::user()->first_name }}" class="input-box rounded w-100 px-3 mb-4"
                                 disabled>
                         </div>
 
                         <div class="col-12 col-sm-6">
                             <label for="name" class="mb-1 fw-semibold">Last Name</label>
-                            <input type="text" value="{{ Auth::user()->last_name }}" class="form-control rounded w-100 px-3 mb-4"
+                            <input type="text" value="{{ Auth::user()->last_name }}" class="input-box rounded w-100 px-3 mb-4"
                                 disabled>
                         </div>
                     </div>
@@ -98,13 +98,13 @@
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <label for="name" class="mb-1 fw-semibold">Job Position</label>
-                            <input type="text" value="{{ $employer?->position ? $employer?->position : ''}}" class="form-control rounded w-100 px-3 mb-4"
+                            <input type="text" value="{{ $employer?->position ? $employer?->position : ''}}" class="input-box rounded w-100 px-3 mb-4"
                                 disabled>
                         </div>
 
                         <div class="col-12 col-sm-6">
                             <label for="name" class="mb-1 fw-semibold">Personal Email</label>
-                            <input type="text" value="{{ Auth::user()->email }}" class="form-control rounded w-100 px-3 mb-4"
+                            <input type="text" value="{{ Auth::user()->email }}" class="input-box rounded w-100 px-3 mb-4"
                                 disabled>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <label for="name" class="mb-1 fw-semibold">Phone Number</label>
-                            <input type="text" value="{{ $employer?->phone ? $employer->phone : '' }}" class="form-control rounded w-100 px-3 mb-4"
+                            <input type="text" value="{{ $employer?->phone ? $employer->phone : '' }}" class="input-box rounded w-100 px-3 mb-4"
                                 disabled>
                         </div>
                     </div>

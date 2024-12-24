@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
-            $table->id();
-            $table->text('skill')->nullable();
-            $table->timestamps();
+        Schema::table('jobs', function (Blueprint $table) {
+            $table->fullText(['job_title', 'requirement']);
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::table('jobs', function (Blueprint $table) {
+            $table->dropFullText(['job_title', 'requirement']);
+        });
     }
 };

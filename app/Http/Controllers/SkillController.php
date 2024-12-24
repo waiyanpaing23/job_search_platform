@@ -12,17 +12,17 @@ class SkillController extends Controller
     {
         $applicant = Auth::user()->applicant;
 
-        // Validate the request
-        $request->validate([
-            'skills' => 'required|array',
-            'skills.*' => 'exists:skills,id|unique:applicant_skill,skill_id',
-        ]);
+        // $request->validate([
+        //     'skills' => 'required|array',
+        //     'skills.*' => 'exists:skills,id|unique:applicant_skill,skill_id',
+        // ]);
 
-        // Attach the selected skills to the applicant
         $applicant->skills()->attach($request->skills);
-
-        // Redirect back to the applicant's profile edit page
-        return redirect()->route('applicant.profile.edit');
+        // return redirect()->route('applicant.profile.edit');
+        $skills = $applicant->skills;
+        return response()->json([
+            'skills'=>$skills
+        ]);
     }
 
     public function delete($id){

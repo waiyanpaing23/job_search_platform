@@ -10,12 +10,13 @@
 
                             <h5 class="mb-3">Search by Keywords</h5>
                             <div class="input-group mb-4">
-                                <input list="keyword" class="form-control input-box bg-light" name="searchData"
-                                    placeholder="Keywords or location" aria-describedby="basic-addon2">
+                                <input list="keyword" class="form-control input-box bg-white" name="searchData"
+                                    placeholder="Keywords or location" aria-describedby="basic-addon2"
+                                    value="{{ old('searchData') }}">
 
                                 <datalist id="keyword">
                                     @foreach ($jobs as $job)
-                                        <option value="{{ $job->job_title }}">
+                                        <option class="w-100" value="{{ $job->job_title }}">
                                     @endforeach
                                 </datalist>
 

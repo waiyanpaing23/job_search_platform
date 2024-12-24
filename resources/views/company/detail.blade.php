@@ -23,24 +23,24 @@
 
                 <div class="d-flex">
                     <div>
-                        <img src="{{ asset('images/' . $company->company_logo) }}" class="logo-detail">
+                        <img src="{{ asset('images/' . $company?->company_logo) }}" class="logo-detail">
                     </div>
                     <div class="ms-5">
-                        <h4><b>{{ $company->company_name }}</b></h4>
-                        <span class="text-muted">{{ $company->industry }}</span>
+                        <h4><b>{{ $company?->company_name }}</b></h4>
+                        <span class="text-muted">{{ $company?->industry }}</span>
 
                         <div class="mt-2">
                             <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
-                                class="text-muted me-3">{{ $company->location }}</span>
+                                class="text-muted me-3">{{ $company?->location }}</span>
                             <i class="fa-solid fa-user-group me-2 text-muted"></i><span
-                                class="text-muted">{{ $company->company_size }}
+                                class="text-muted">{{ $company?->company_size }}
                                 employees</span>
                         </div>
 
                         <div class="mt-2">
-                            <span class="company-info me-1">{{ $company->contact_email }}</span>
+                            <span class="company-info me-1">{{ $company?->contact_email }}</span>
 
-                            <a href="{{ $company->website_Url }}" class="text-decoration-none text-dark company-info"><i
+                            <a href="{{ $company?->website_Url }}" class="text-decoration-none text-dark company-info"><i
                                     class="fa-solid fa-globe"></i> Website</a>
                         </div>
                     </div>
@@ -48,9 +48,9 @@
 
             </div>
 
-            <h4 class="my-4"><b>About {{ $company->company_name }}</b></h4>
+            <h4 class="my-4"><b>About {{ $company?->company_name }}</b></h4>
 
-            <p>{{ $company->company_description }}</p>
+            <p>{{ $company?->company_description }}</p>
 
             <hr class="my-5">
 

@@ -1,7 +1,7 @@
 @extends('employer/layouts/master')
 
 @section('content')
-    <div class="container-fluid bg-light p-5">
+    <div class="container-fluid bg-custom p-5">
 
         <div class="row d-flex justify-content-center">
 

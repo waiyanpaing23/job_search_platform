@@ -17,6 +17,10 @@ Route::middleware('auth')->group(function () {
         Route::get('profile', [EmployerController::class, 'profile'])->name('employer.profile');
         Route::get('profile/edit', [EmployerController::class, 'editProfile'])->name('employer.profile.edit');
         Route::post('profile/edit', [EmployerController::class, 'updateProfile'])->name('employer.profile.update');
+
+        Route::get('applicants', [EmployerController::class, 'applicantList'])->name('applicant.list');
+        Route::get('applicants/{id}', [EmployerController::class, 'applicantDetail'])->name('applicant.detail');
+        Route::patch('applicants/{id}/status', [EmployerController::class, 'updateStatus'])->name('applicant.status.update');
     });
 
     Route::prefix('company')->group( function() {
@@ -29,4 +33,5 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::get('companies', [CompanyController::class, 'list'])->name('companies');
 Route::get('company/{id}', [CompanyController::class, 'detail'])->name('company.detail');
