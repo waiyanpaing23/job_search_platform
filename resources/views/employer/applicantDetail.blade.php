@@ -1,5 +1,7 @@
 @extends('employer.layouts.master')
 
+@section('title', 'Application Review')
+
 @section('content')
     <div class="container-fluid p-5">
         <h4 class="fw-bold mb-4">Application Review</h4>
@@ -58,12 +60,14 @@
                                 class="img-fluid rounded-circle profile my-4"><br>
                         </div>
                         <div class="ms-5">
-                            <h5><b>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</b></h5>
+                            <h5><b>{{ $application->applicant->user->first_name . ' ' . $application->applicant->user->last_name }}</b></h5>
                             <span class="text-muted d-block">{{ $application->email }}</span>
                             <span class="text-muted d-block">{{ $application->phone }}</span>
+                            @if ($application->applicant->address)
                             <div class="mt-2">
                                 <span class="company-info me-1">{{ $application->applicant->address }}</span>
                             </div>
+                            @endif
                         </div>
                     </div>
 

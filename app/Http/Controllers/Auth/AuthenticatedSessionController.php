@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         if( $request->user()->role === 'user') {
             return redirect('/');
         }
-        if( $request->user()->role === 'admin') {
+        if( $request->user()->role === 'admin' || $request->user()->role === 'superadmin') {
             return redirect()->route('admin');
         }
         if( $request->user()->role === 'employer') {

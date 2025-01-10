@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Search Jobs')
+
 @section('content')
     <div class="container-fluid p-5">
         <div class="row">
@@ -89,7 +91,7 @@
                                 class="d-flex flex-column justify-content-between px-3 pb-3 mb-4 border border-2 rounded bg-white shadow-sm">
 
                                 <div class="jobpost">
-                                    <img src="{{ asset('images/' . $job->employer->company->company_logo) }}"
+                                    <img src="{{ asset('images/' . $job->company->company_logo) }}"
                                         class="img-fluid jobpost-logo my-3">
 
                                     <a href="{{ route('job.detail', $job->id) }}"
@@ -97,7 +99,7 @@
                                         <h4><b>{{ $job->job_title }}</b></h4>
                                     </a>
 
-                                    <p>{{ $job->employer->company->company_name }}</p>
+                                    <p>{{ $job->company->company_name }}</p>
 
                                     <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
                                         class="text-muted me-3">{{ $job->location }}</span>

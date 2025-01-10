@@ -324,6 +324,12 @@ ul{
 .applicant-list span{
     line-height: 10px !important;
 }
+.applicant-name{
+    font-weight: 600;
+}
+.applicant-name:hover{
+    text-decoration: underline !important;
+}
 @media(max-width:1000px) {
     .img-slider{
         display: none;

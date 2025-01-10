@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Application Overview')
+
 @section('content')
 
 <div class="container-fluid p-5">

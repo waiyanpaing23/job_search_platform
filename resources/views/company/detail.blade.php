@@ -15,6 +15,10 @@
 
 @extends($layout)
 
+@section('title')
+    {{ $company?->company_name }} - Company Detail
+@endsection
+
 @section('content')
     <div class="row d-flex justify-content-center">
         <div class="col-8 py-5">
@@ -59,7 +63,8 @@
 
             <div class="d-flex">
 
-                @foreach ($jobs as $job)
+                @if ($jobs->count())
+                    @foreach ($jobs as $job)
                     <div class="job-opening-section pe-2 py-4">
                         <div class="py-3 px-4 mb-4 border rounded shadow-sm bg-white job-opening">
 
@@ -76,7 +81,10 @@
 
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <i class="mt-4">No job opening available.</i>
+                @endif
 
             </div>
 

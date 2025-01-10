@@ -1,7 +1,19 @@
-@extends('layouts/master')
+@php
+    $layout = 'admin.layouts.master';
+
+    if (Auth::check() && Auth::user()->role) {
+        switch (Auth::user()->role) {
+            case 'employer':
+                $layout = 'employer.layouts.master';
+                break;
+        }
+    }
+@endphp
+
+@extends($layout)
 
 @section('title')
-{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} | Profile
+{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} - View Profile
 @endsection
 
 @section('content')
@@ -11,7 +23,7 @@
 
             <div class="col-12 col-lg-9">
 
-                <div class=" border border-radius bg-white">
+                <div class=" border border-radius bg-white mt-3">
 
                     <div class="bg-dark header p-4">
                         <h4 class="text-white"><b>Applicant Profile</b></h4>
@@ -21,16 +33,13 @@
 
                         <div class="row d-flex align-items-center">
                             <div class="col-2">
-                                <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
+                                <img src="{{ $applicant->user->profile_image ? asset('images/' . $applicant->user->profile_image) : asset('images/profile.jpg') }}"
                                     class="img-fluid rounded-circle profile my-4"><br>
                             </div>
                             <div class="col">
-                                <h5><b>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</b></h5>
+                                <h5><b>{{ $applicant->user->first_name . ' ' . $applicant->user->last_name }}</b></h5>
                                 <span class="text-muted d-block">{{ $applicant->bio }}</span>
                                 <span class="text-muted d-block">{{ $applicant->address }} Region</span>
-                            </div>
-                            <div class="col d-flex justify-content-end">
-                                <a href="{{ route('applicant.profile.edit') }}" class="btn pink mb-4">Edit Profile</a>
                             </div>
                         </div>
                     </div>
@@ -58,13 +67,13 @@
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-2 fw-semibold">First Name</label>
-                                <input type="text" value="{{ Auth::user()->first_name }}"
+                                <input type="text" value="{{ $applicant->user->first_name }}"
                                     class="form-control input-box rounded w-100 px-3 mb-4" disabled>
                             </div>
 
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-2 fw-semibold">Last Name</label>
-                                <input type="text" value="{{ Auth::user()->last_name }}"
+                                <input type="text" value="{{ $applicant->user->last_name }}"
                                     class="form-control input-box rounded w-100 px-3 mb-4" disabled>
                             </div>
                         </div>
@@ -79,7 +88,7 @@
 
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-2 fw-semibold">Personal Email</label>
-                                <input type="text" value="{{ Auth::user()->email }}"
+                                <input type="text" value="{{ $applicant->user->email }}"
                                     class="form-control input-box rounded w-100 px-3 mb-4" disabled>
                             </div>
                         </div>
@@ -129,7 +138,7 @@
                         <h4 class="fw-bold mb-4">Experience</h4>
                         @if ($experiences->isEmpty())
                             <div class="profile-content px-3">
-                                <p><i>Your work experience will appear here once you add it.</i></p>
+                                <p><i>No experience data</i></p>
                             </div>
                         @else
                             @foreach ($experiences as $experience)
@@ -150,7 +159,7 @@
                         <h4 class="fw-bold mb-4">Education</h4>
                         @if ($educations->isEmpty())
                             <div class="profile-content px-3">
-                                <p><i>Your work experience will appear here once you add it.</i></p>
+                                <p><i>No education data</i></p>
                             </div>
                         @else
                             @foreach ($educations as $education)
@@ -172,8 +181,7 @@
                         <h4 class="fw-bold mb-4">Skills</h4>
                         <div class="skills">
                             @if ($applicant->skills->isEmpty())
-                                <span class="profile-content px-3"><i>Your skills will appear here once you add
-                                        them.</i></span>
+                                <span class="profile-content px-3"><i>No skill data</i></span>
                             @else
                                 @foreach ($applicant->skills as $skill)
                                     <div class="py-1 px-3 me-2 rounded-pill bg-cyan">{{ $skill->skill }}</div>
@@ -186,29 +194,6 @@
 
             </div>
 
-            <div class="col-12 col-lg-3">
-                <div class="border border-radius bg-white p-4">
-                    <h5 class="mb-4"><b>Recommended for you</b></h5>
-                    @if (!empty($recommendations))
-                    @foreach ($recommendations as $index => $job)
-                        <a href="{{ route('job.detail', $job->id) }}" class="text-decoration-none text-dark link">
-                            <h5>{{ $job->job_title }}</h5>
-                        </a>
-
-                        <p class="text-muted">{{ $job->company->company_name }}</p>
-
-                        <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
-                            class="text-muted me-3">{{ $job->location }}</span>
-                        <i class="fa-solid fa-briefcase me-2 text-muted"></i><span
-                            class="text-muted">{{ $job->job_type }}</span>
-
-                        @if ($index !== $recommendations->count() - 1)
-                            <hr class="my-4">
-                        @endif
-                    @endforeach
-                    @endif
-                </div>
-            </div>
         </div>
 
     </div>
@@ -263,3 +248,4 @@
         });
     </script>
 @endsection
+

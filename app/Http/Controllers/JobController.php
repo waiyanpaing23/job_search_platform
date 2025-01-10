@@ -58,6 +58,79 @@ class JobController extends Controller
         return view('job.detail', compact('job', 'requirements', 'benefits', 'related_jobs'));
     }
 
+    public function list(){
+        $employer = Auth::user()->employer;
+        $company = $employer->company;
+
+        if (!$company) {
+            return redirect()->back()->with([
+                'title' => 'Error',
+                'message' => 'You do not have a company associated with your profile.'
+            ]);
+        }
+
+        $jobs = Job::where('company_id', $company->id)
+                ->when(request('searchData'), function($query) {
+                    $query->whereAny(['job_title', 'location'], 'like', '%'.request('searchData').'%');
+                })
+                ->when(request('category'), function($query) {
+                    $query->where('category_id', request('category'));
+                })
+                ->when(request('status'), function($query) {
+                    $query->where('status', request('status'));
+                })
+                ->paginate(8);
+
+        return view('employer.myjobs', compact('jobs', 'employer', 'company'));
+    }
+
+    public function edit($id) {
+        $job = Job::where('id', $id)->first();
+        $categories = Category::all();
+
+        return view('job.edit', compact('job', 'categories'));
+    }
+
+    public function update($id, Request $request) {
+        $this->validateJobPost($request);
+
+        $data = $this->requestJobData($request);
+
+        $job = Job::where('id', $id)->update($data);
+
+        return to_route('job.detail', ['id' => $id])->with([
+            'title' => 'Job Updated Successfully!',
+            'message' => 'Your job post has been updated successfully.'
+        ]);
+    }
+
+    public function close($id) {
+        Job::where('id', $id)->update(['status' => 'Closed']);
+
+        return to_route('employer.job.list')->with([
+            'title' => 'Job Closed Successfully!',
+            'message' => 'Your job post has been closed successfully.'
+        ]);
+    }
+
+    public function activate($id) {
+        Job::where('id', $id)->update(['status' => 'Open']);
+
+        return to_route('employer.job.list')->with([
+            'title' => 'Job Activated Successfully!',
+            'message' => 'Your job post has been activated successfully.'
+        ]);
+    }
+
+    public function delete($id) {
+        Job::where('id', $id)->delete();
+
+        return to_route('employer.job.list')->with([
+            'title' => 'Job Deleted Successfully!',
+            'message' => 'Your job post has been deleted successfully.'
+        ]);
+    }
+
     private function validateJobPost($request) {
         $request->validate([
             'title' => 'required',
@@ -81,7 +154,7 @@ class JobController extends Controller
         return [
             'job_title' => $request->title,
             'description' => $request->description,
-            'company' => $companyData->id,
+            'company_id' => $companyData->id,
             'location' => $request->location,
             'job_type' => $request->jobtype,
             'category_id' => $request->category,

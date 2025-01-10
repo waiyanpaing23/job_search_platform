@@ -1,5 +1,7 @@
 @extends('employer/layouts/master')
 
+@section('title', 'Create Company Profile')
+
 @section('content')
     <div class="container-fluid p-5">
         <div class="row d-flex justify-content-center">

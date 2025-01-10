@@ -1,5 +1,9 @@
 @extends('employer/layouts/master')
 
+@section('title')
+{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} - Employer Profile
+@endsection
+
 @section('content')
     <div class="container-fluid p-5">
 

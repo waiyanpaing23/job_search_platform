@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ApplicantController::class, 'index'])->name('user.dashboard');
 
-Route::get('job/search', [ApplicantController::class, 'list'])->name('list');
+Route::get('job/search', [ApplicantController::class, 'jobList'])->name('list');
 Route::get('job/{id}', [JobController::class, 'detail'])->name('job.detail');
 
 // Route::get('/dashboard', function () {
@@ -53,10 +53,6 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('home', [UserController::class, 'index'])->name('home')->middleware('user');
 
-    Route::prefix('admin')->group( function() {
-        Route::get('dashboard', [AdminController::class, 'index'])->name('admin')->middleware('admin');
-    });
-
     Route::prefix('applicant')->middleware('applicant')->group( function() {
         Route::get('profile', [ApplicantController::class, 'profile'])->name('applicant.profile');
         Route::get('profile/edit', [ApplicantController::class, 'editProfile'])->name('applicant.profile.edit');
@@ -71,7 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::get('education/delete/{id}', [EducationController::class, 'delete'])->name('education.delete');
 
         Route::post('/skills/add', [SkillController::class, 'create'])->name('skill.create');
-        Route::get('/skills/delete/{id}', [SkillController::class, 'delete'])->name('skill.delete');
+        Route::delete('/skills/delete/{id}', [SkillController::class, 'delete'])->name('skill.delete');
 
         Route::get('applications', [ApplicationController::class, 'list'])->name('application.list');
         Route::get('applications/{id}', [ApplicationController::class, 'detail'])->name('application.detail');
@@ -83,6 +79,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/employer.php';
+require __DIR__.'/admin.php';
 
 Route::get('/auth/{provider}/redirect', [SocialiteController::class, 'redirect']);
 

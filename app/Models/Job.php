@@ -25,6 +25,7 @@ class Job extends Model
         'salary_type',
         'expiry_date',
         'employer_id',
+        'company_id',
         'contact_email',
         'status'
     ];
@@ -32,6 +33,11 @@ class Job extends Model
     public function employer():BelongsTo
     {
         return $this->belongsTo(Employer::class);
+    }
+
+    public function company():BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function category():BelongsTo
@@ -44,8 +50,4 @@ class Job extends Model
         return $this->hasMany(Application::class);
     }
 
-    public function savedjob():HasMany
-    {
-        return $this->hasMany(Savedjob::class);
-    }
 }

@@ -30,10 +30,10 @@ class ApplicantController extends Controller
         return view('user.dashboard', compact('jobs', 'industries', 'recommendations', 'companies'));
     }
 
-    public function list() {
+    public function jobList() {
         $categories = Category::all();
 
-        $jobs = Job::with('employer.company')
+        $jobs = Job::where('status', 'Open')
                 ->when(request('searchData'), function($query) {
                     $query->whereAny(['job_title', 'location'],'like','%'.request('searchData').'%');
                 })
@@ -45,7 +45,7 @@ class ApplicantController extends Controller
                 })
                 ->paginate(8);
 
-        return view('user.list', compact('jobs', 'categories'));
+        return view('user.searchJob', compact('jobs', 'categories'));
     }
 
     public function profile() {
@@ -116,14 +116,14 @@ class ApplicantController extends Controller
 
             $keywords = [];
 
-            if ($applicant->bio) {
+            if ($applicant?->bio) {
                 $keywords = array_merge($keywords, explode(' ', $applicant->bio));
             }
 
-            if ($applicant->about) {
+            if ($applicant?->about) {
                 $keywords = array_merge($keywords, explode(' ', $applicant->about));
             }
-            if($applicant->skills) {
+            if($applicant?->skills) {
                 $skills = $applicant->skills->pluck('name')->toArray();
                 $keywords = array_merge($keywords, $skills);
             }

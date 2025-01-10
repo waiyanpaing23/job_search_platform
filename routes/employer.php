@@ -21,7 +21,16 @@ Route::middleware('auth')->group(function () {
         Route::get('applicants', [EmployerController::class, 'applicantList'])->name('applicant.list');
         Route::get('applicants/{id}', [EmployerController::class, 'applicantDetail'])->name('applicant.detail');
         Route::patch('applicants/{id}/status', [EmployerController::class, 'updateStatus'])->name('applicant.status.update');
+
+        Route::get('job/list', [JobController::class, 'list'])->name('employer.job.list');
+        Route::get('job/edit/{id}', [JobController::class, 'edit'])->name('job.edit');
+        Route::post('job/edit/{id}', [JobController::class, 'update'])->name('job.update');
+        Route::post('job/close/{id}', [JobController::class, 'close'])->name('job.close');
+        Route::post('job/activate/{id}', [JobController::class, 'activate'])->name('job.activate');
+        Route::get('job/delete/{id}', [JobController::class, 'delete'])->name('job.delete');
     });
+
+    Route::get('employer/applicant/{id}/profile', [EmployerController::class, 'applicantProfile'])->name('applicant.profile.view');
 
     Route::prefix('company')->group( function() {
         Route::get('create', [CompanyController::class, 'create'])->name('company.create');
@@ -30,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::get('link/{id}', [CompanyController::class, 'link'])->name('company.link');
         Route::get('edit', [CompanyController::class, 'edit'])->name('company.edit');
         Route::post('edit', [CompanyController::class, 'update'])->name('company.update');
+        Route::get('remove/{id}', [CompanyController::class, 'remove'])->name('company.remove');
     });
 });
 

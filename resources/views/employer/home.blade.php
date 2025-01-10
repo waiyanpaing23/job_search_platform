@@ -1,6 +1,6 @@
 @extends('employer.layouts.master')
 
-@section('title', 'Home')
+@section('title', 'Employer - ProsPath')
 
 @section('styles')
 <style>

@@ -103,23 +103,22 @@
     </div>
 
     <footer>
-        <div class="row p-5">
-            <div class="col-12 col-md-3">
+        <div class="row p-5 d-flex justify-content-evenly">
+            <div class="col-12 col-md-4">
                 <a class="navbar-brand text-white h3" href="#">Pros<span class="path">Path</span></a>
                 <p class="mt-2">Copyright &copy; 2024, ProsPath</p>
+                <div class="mt-5">
+                    <i class="fa-brands fa-x-twitter h4 me-3"></i>
+                    <i class="fa-brands fa-linkedin h4 me-3"></i>
+                    <i class="fa-brands fa-instagram h4 me-3"></i>
+                </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md-4">
                 <h5>ProsPath</h5>
                 <a href="#">About Us</a>
                 <a href="#">Contact Us</a>
                 <a href="#">Terms and Conditions</a>
                 <a href="#">Privacy Policy</a>
-            </div>
-            <div class="col-6 col-md-3">
-                <h5>Job Seekers</h5>
-            </div>
-            <div class="col-6 col-md-3">
-                <h5>Employers</h5>
             </div>
         </div>
     </footer>

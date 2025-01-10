@@ -1,5 +1,7 @@
 @extends('employer/layouts/master')
 
+@section('title', 'Search Company')
+
 @section('content')
     <div class="container-fluid p-5">
 

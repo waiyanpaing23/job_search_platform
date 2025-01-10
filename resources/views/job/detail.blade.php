@@ -15,6 +15,10 @@
 
 @extends($layout)
 
+@section('title')
+    {{ $job->job_title }} - Job Detail
+@endsection
+
 @section('content')
     <div class="row d-flex justify-content-center">
         <div class="col-10 py-5">
@@ -24,11 +28,11 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex">
                         <div>
-                            <img src="{{ asset('images/' . $job->employer->company->company_logo) }}" class="logo-detail">
+                            <img src="{{ asset('images/' . $job->company->company_logo) }}" class="logo-detail">
                         </div>
                         <div class="ms-5">
                             <h4><b>{{ $job->job_title }}</b></h4>
-                            <span class="text-muted">{{ $job->employer->company->company_name }}</span>
+                            <span class="text-muted">{{ $job->company->company_name }}</span>
 
                             <div class="mt-2">
                                 <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
@@ -94,10 +98,10 @@
 
                     <div class="mt-4 border shadow-sm bg-white rounded p-4">
                         <h5><b>Company Overview</b></h5>
-                        <img src="{{ asset('images/' . $job->employer->company->company_logo) }}" class="logo-detail my-2">
-                        <h5>{{ $job->employer->company->company_name }}</h5>
-                        <p class="text-muted">{{$job->employer->company->industry }}</p>
-                        <a href="{{ route('company.detail', $job->employer->company->id) }}" class="btn pink w-100">View Company Profile</a>
+                        <img src="{{ asset('images/' . $job->company->company_logo) }}" class="logo-detail my-2">
+                        <h5>{{ $job->company->company_name }}</h5>
+                        <p class="text-muted">{{$job->company->industry }}</p>
+                        <a href="{{ route('company.detail', $job->company->id) }}" class="btn pink w-100">View Company Profile</a>
                     </div>
 
                     <div class="mt-4 border shadow-sm bg-white rounded p-3">
@@ -107,7 +111,7 @@
                                 <h5>{{ $job->job_title }}</h5>
                             </a>
 
-                            <p class="text-muted">{{$job->employer->company->company_name}}</p>
+                            <p class="text-muted">{{$job->company->company_name}}</p>
 
                             <i class="fa-solid fa-location-dot me-2 text-muted"></i><span
                                 class="text-muted me-3">{{ $job->location }}</span>

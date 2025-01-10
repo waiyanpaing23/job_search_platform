@@ -103,27 +103,30 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function remove() {
+        $employer = Auth::user()->employer;
+
+         Employer::find($employer->id)->update([
+            'company_id' => null
+        ]);
+
+        return to_route('employer.profile')->with([
+            'title' => 'Remove Company Association Successfully',
+            'message' => 'You have successfully removed your association with the company!'
+        ]);
+    }
+
     public function detail($id) {
         $company = Company::where('id', $id)->first();
-        $jobs = Job::whereHas('employer', function ($query) use ($id) {
-            $query->where('id', $id);
+        $jobs = Job::where('status', 'Open')
+                ->whereHas('employer', function ($query) use ($id) {
+                    $query->where('id', $id);
         })->get();
 
         return view('company.detail', compact('company', 'jobs'));
     }
 
     public function list() {
-        // $jobs = Job::with('employer.company')
-        //         ->when(request('searchData'), function($query) {
-        //             $query->whereAny(['job_title'],'like','%'.request('searchData').'%');
-        //         })
-        //         ->when(request('category'), function($query) {
-        //             $query->where('category_id', request('category'));
-        //         })
-        //         ->when(request('job_type'), function($query) {
-        //             $query->where('job_type', request('job_type'));
-        //         })
-        //         ->paginate(8);
         $companies = Company::withCount('jobs')
                     ->when(request('searchData'), function($query) {
                         $query->whereAny(['company_name', 'location'],'like','%'.request('searchData').'%');

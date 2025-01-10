@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'My Applications')
+
 @section('content')
     <div class="container px-5 py-4">
         <h3 class="fw-bold mb-4">My Applications</h3>

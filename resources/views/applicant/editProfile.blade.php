@@ -1,5 +1,9 @@
 @extends('layouts/master')
 
+@section('title')
+{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} | Edit Profile
+@endsection
+
 @section('content')
     <div class="container p-5">
 
@@ -333,13 +337,24 @@
                     <div class="content p-4 border rounded bg-white mt-3" id="skillsContent">
                         <h4 class="fw-bold mb-4">Skills</h4>
                         <div class="skills mb-4 px-3" id="applicant_skills">
-                            @foreach ($applicant->skills as $skill)
+                            {{-- @foreach ($applicant->skills as $skill)
                                 <div class="py-1 px-3 me-2 mb-3 rounded-pill bg-cyan">
                                     <span>{{ $skill->skill }}</span>
-                                    <a href="{{ route('skill.delete', $skill->id) }}" class="text-decoration-none"><i
-                                            class="fa-solid fa-xmark text-dark"></i></a>
+                                    <button type="button" id="deleteSkill"
+                                        class="btn btn-link p-0 text-decoration-none"><i
+                                            class="fa-solid fa-xmark text-dark"></i></button>
+                                </div>
+                            @endforeach --}}
+                            @foreach ($applicant->skills as $skill)
+                                <div class="py-1 px-3 me-2 mb-3 rounded-pill bg-cyan" data-id="{{ $skill->id }}">
+                                    <span>{{ $skill->skill }}</span>
+                                    <button type="button" id="deleteSkill"
+                                        class="btn btn-link p-0 text-decoration-none">
+                                        <i class="fa-solid fa-xmark text-dark"></i>
+                                    </button>
                                 </div>
                             @endforeach
+
                         </div>
                         <div class="row">
                             <div class="col-7">
@@ -505,7 +520,6 @@
 
 @section('script')
     <script>
-
         $(document).on('click', '#add_skills', function() {
             let selectedSkills = $('#skills').val();
 
@@ -528,10 +542,12 @@
 
                         new_skills.forEach(skill => {
                             skills_html += `
-                            <div class="py-1 px-3 me-2 rounded-pill bg-cyan">
+                            <div class="py-1 px-3 me-2 mb-3 rounded-pill bg-cyan" data-id="${skill.id}">
                                 <span>${skill.skill}</span>
-                                <a href="{{ route('skill.delete', $skill->id) }}" class="text-decoration-none"><i
-                                        class="fa-solid fa-xmark text-dark"></i></a>
+                                <button type="button" id="deleteSkill"
+                                        class="btn btn-link p-0 text-decoration-none">
+                                        <i class="fa-solid fa-xmark text-dark"></i>
+                                    </button>
                             </div>
                         `;
                         });
@@ -551,6 +567,33 @@
             ajaxSkills();
 
         });
+
+        $(document).on('click', '#deleteSkill', function() {
+            let skillElement = $(this).closest('div'); // Get the parent skill div
+            let skillId = skillElement.data('id'); // Assuming skill ID is stored in a data attribute on the div
+
+            $.ajax({
+                type: 'DELETE', // HTTP method for deletion
+                url: `/applicant/skills/delete/${skillId}`, // RESTful endpoint for deleting a skill
+                data: {
+                    _token: '{{ csrf_token() }}' // CSRF token for security
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Remove the skill element from the DOM
+                        skillElement.remove();
+                        console.log('Skill deleted successfully');
+                    } else {
+                        alert('Error: Unable to delete skill');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    alert('An error occurred while deleting the skill.');
+                }
+            });
+        });
+
 
         document.addEventListener('DOMContentLoaded', function() {
             // Get all the buttons and content sections

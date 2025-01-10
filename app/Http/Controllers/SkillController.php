@@ -25,12 +25,16 @@ class SkillController extends Controller
         ]);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $applicant = Auth::user()->applicant;
 
-        $applicant->skills()->detach($id);
+        // Check if the skill exists in the applicant's skills
+        if ($applicant->skills()->detach($id)) {
+            return response()->json(['success' => true, 'message' => 'Skill deleted successfully']);
+        }
 
-        return redirect()->route('applicant.profile.edit');
+        return response()->json(['success' => false, 'message' => 'Skill not found or not associated with the applicant'], 404);
     }
 
 }

@@ -49,7 +49,7 @@
                                 <a class="nav-link" href="{{ route('job.new') }}">Post Job</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">My Jobs</a>
+                                <a class="nav-link" href="{{ route('employer.job.list') }}">Jobs Overview</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('applicant.list') }}">Applicants</a>
@@ -99,7 +99,7 @@
     </div>
 
 
-    <div class="bg-custom">
+    <div class="container-fluid bg-custom">
         @yield('content')
     </div>
 

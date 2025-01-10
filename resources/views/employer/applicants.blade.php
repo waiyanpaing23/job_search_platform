@@ -1,8 +1,10 @@
 @extends('employer.layouts.master')
 
+@section('title', 'Applicants')
+
 @section('content')
     <div class="container px-5 py-4">
-        <h3 class="fw-bold mb-4">Applicant Overview</h3>
+        <h3 class="fw-bold mb-4">Applicants</h3>
         <div class="row pt-1">
             <div class="col-4">
                 <div class="p-3 border border-2 bg-white shadow-sm rounded">
@@ -85,14 +87,16 @@
                         <tr>
                             <td class="fw-bold">{{ $loop->iteration }}</td>
                             <td>
-                                <div class="d-flex applicant-list">
-                                    <img src="{{ $application->applicant->user->profile_image ? asset('images/' . $application->applicant->user->profile_image) : asset('images/profile.jpg') }}"
-                                    class="img-fluid rounded-circle nav-profile me-3">
-                                    <div>
-                                        <span class="d-block">{{ $application->first_name }} {{ $application->last_name }}</span>
-                                        <span class="text-muted">{{ $application->email }}</span>
+                                <a href="{{route('applicant.profile.view', $application->applicant->id)}}" class="text-decoration-none text-dark">
+                                    <div class="d-flex applicant-list">
+                                        <img src="{{ $application->applicant->user->profile_image ? asset('images/' . $application->applicant->user->profile_image) : asset('images/profile.jpg') }}"
+                                        class="img-fluid rounded-circle nav-profile me-3">
+                                        <div>
+                                            <span class="d-block applicant-name">{{ $application->first_name }} {{ $application->last_name }}</span>
+                                            <span class="text-muted">{{ $application->email }}</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </td>
                             <td>{{ $application->job->job_title }}</td>
                             <td>{{ \Carbon\Carbon::parse($application->created_at)->format('d-m-Y') }}</td>
@@ -109,6 +113,10 @@
                             @elseif ($application->status == 'Rejected')
                                 <td>
                                     <span class="rounded-pill company-info bg-danger text-white">{{ $application->status }}</span>
+                                </td>
+                            @elseif ($application->status == 'Hired')
+                                <td>
+                                    <span class="rounded-pill company-info bg-success text-white">{{ $application->status }}</span>
                                 </td>
                             @elseif ($application->status == 'Withdrawn')
                                 <td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\Company;
 use App\Models\Employer;
@@ -86,15 +87,22 @@ class EmployerController extends Controller
         $employer = Auth::user()->employer;
         $company = $employer->company;
 
+        if (!$company) {
+            return redirect()->back()->with([
+                'title' => 'Error',
+                'message' => 'You do not have a company associated with your profile.'
+            ]);
+        }
+
         $searchData = request('searchData');
 
         $applications = Application::whereHas('job.employer.company', function($query) use ($company) {
-                        $query->where('id', $company->id);
-                        })
-                        ->when(request('status'), function($query) {
-                            $query->where('status', request('status'));
-                        })
-                        ->get();
+            $query->where('id', $company->id);
+            })
+            ->when(request('status'), function($query) {
+                $query->where('status', request('status'));
+            })
+            ->get();
 
         $statuses = $applications->pluck('status')->unique();
         $new = Application::where('status', 'Pending')
@@ -111,6 +119,14 @@ class EmployerController extends Controller
         $application = Application::find($id);
 
         return view('employer.applicantDetail', compact('application'));
+    }
+
+    public function applicantProfile($id) {
+        $applicant = Applicant::where('id', $id)->first();
+        $experiences = $applicant->experiences;
+        $educations = $applicant->educations;
+
+        return view('employer.viewProfile', compact('applicant', 'experiences', 'educations'));
     }
 
     public function updateStatus(Request $request, $id) {

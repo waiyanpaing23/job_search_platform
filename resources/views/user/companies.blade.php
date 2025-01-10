@@ -15,6 +15,8 @@
 
 @extends($layout)
 
+@section('title', 'Explore Companies')
+
 @section('content')
     <div class="container-fluid px-5 py-4">
         <div class="row d-flex justify-content-center">

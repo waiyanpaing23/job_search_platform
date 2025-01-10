@@ -1,5 +1,9 @@
 @extends('employer/layouts/master')
 
+@section('title')
+    {{ $company->company_name }} | Edit
+@endsection
+
 @section('content')
     <div class="container p-5">
 
@@ -83,8 +87,9 @@
                         <div class="row pt-3">
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-1 fw-semibold">Name</label>
-                                <input type="text" value="{{ old('company_name',$company->company_name) }}"
-                                    class="input-box rounded w-100 px-3" name="company_name" @error('company_name') is-invalid @enderror>
+                                <input type="text" value="{{ old('company_name', $company->company_name) }}"
+                                    class="input-box rounded w-100 px-3" name="company_name"
+                                    @error('company_name') is-invalid @enderror>
                                 @error('company_name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -111,8 +116,7 @@
                         <div class="row pt-3">
                             <div class="col-12">
                                 <label for="name" class="mb-1 fw-semibold">Company Description</label>
-                                <textarea class="rounded w-100 px-3" name="description" rows="4"
-                                 @error('description') is-invalid @enderror>{{ old('description', $company->company_description) }}</textarea>
+                                <textarea class="rounded w-100 px-3" name="description" rows="4" @error('description') is-invalid @enderror>{{ old('description', $company->company_description) }}</textarea>
                                 @error('description')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -123,7 +127,8 @@
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-1 fw-semibold">Website</label>
                                 <input type="text" value="{{ old('website_url', $company->website_url) }}"
-                                    class="input-box rounded w-100 px-3" name="website_url" @error('website_url') is-invalid @enderror>
+                                    class="input-box rounded w-100 px-3" name="website_url"
+                                    @error('website_url') is-invalid @enderror>
                                 @error('website_url')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -132,7 +137,8 @@
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-1 fw-semibold">Location</label>
                                 <input type="text" value="{{ old('location', $company->location) }}"
-                                    class="input-box rounded w-100 px-3" name="location" @error('location') is-invalid @enderror>
+                                    class="input-box rounded w-100 px-3" name="location"
+                                    @error('location') is-invalid @enderror>
                                 @error('location')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -143,7 +149,8 @@
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-1 fw-semibold">Contact Email</label>
                                 <input type="text" value="{{ old('email', $company->contact_email) }}"
-                                    class="input-box rounded w-100 px-3" name="email" @error('email') is-invalid @enderror>
+                                    class="input-box rounded w-100 px-3" name="email"
+                                    @error('email') is-invalid @enderror>
                                 @error('email')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -152,7 +159,8 @@
                             <div class="col-12 col-sm-6">
                                 <label for="name" class="mb-1 fw-semibold">Phone Number</label>
                                 <input type="text" value="{{ old('phone', $company->phone) }}"
-                                    class="input-box rounded w-100 px-3" name="phone" @error('phone') is-invalid @enderror>
+                                    class="input-box rounded w-100 px-3" name="phone"
+                                    @error('phone') is-invalid @enderror>
                                 @error('phone')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -194,18 +202,15 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row pt-4">
-                            <div class="col">
-                                <div class="d-flex justify-content-end">
-                                    <input type="submit" class="btn pink" value="Save Changes">
-                                </div>
+                            <div class="col d-flex justify-content-between">
+                                <a href="{{ route('company.remove', $company->id) }}" class="btn btn btn-danger"><i class="fa-solid fa-link-slash"></i> Remove Company Assocation</a>
+                                <input type="submit" class="btn pink" value="Save Changes">
                             </div>
                         </div>
 
+                    </form>
                 </div>
-
-                {{-- <a class="btn btn-sm btn-danger w-100 mt-3"><i class="fa-solid fa-trash me-2"></i> Delete Company</a> --}}
 
             </div>
         </div>

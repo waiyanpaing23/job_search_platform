@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('salary_type')->nullable();
             $table->date('expiry_date')->nullable();
             $table->foreignId('employer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('contact_email');
             $table->enum('status',['Open', 'Closed'])->default('Open');
             $table->timestamps();

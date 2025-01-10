@@ -1,5 +1,9 @@
 @extends('employer/layouts/master')
 
+@section('title')
+{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} | Edit Profile
+@endsection
+
 @section('content')
     <div class="container-fluid bg-custom p-5">
 
