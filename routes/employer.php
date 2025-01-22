@@ -25,8 +25,8 @@ Route::middleware('auth')->group(function () {
         Route::get('job/list', [JobController::class, 'list'])->name('employer.job.list');
         Route::get('job/edit/{id}', [JobController::class, 'edit'])->name('job.edit');
         Route::post('job/edit/{id}', [JobController::class, 'update'])->name('job.update');
-        Route::post('job/close/{id}', [JobController::class, 'close'])->name('job.close');
-        Route::post('job/activate/{id}', [JobController::class, 'activate'])->name('job.activate');
+        Route::post('job/close', [JobController::class, 'close'])->name('job.close');
+        Route::post('job/activate', [JobController::class, 'activate'])->name('job.activate');
         Route::get('job/delete/{id}', [JobController::class, 'delete'])->name('job.delete');
     });
 

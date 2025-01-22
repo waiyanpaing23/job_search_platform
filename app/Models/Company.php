@@ -19,7 +19,8 @@ class Company extends Model
         'company_size',
         'location',
         'contact_email',
-        'phone'
+        'phone',
+        'status'
     ];
 
     public function employers():HasMany

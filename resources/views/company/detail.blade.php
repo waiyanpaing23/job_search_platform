@@ -21,15 +21,15 @@
 
 @section('content')
     <div class="row d-flex justify-content-center">
-        <div class="col-8 py-5">
+        <div class="col-11 col-md-8 py-5">
 
-            <div class="border rounded px-5 py-4 bg-white shadow-sm">
+            <div class="border rounded px-5 py-4 bg-white shadow-sm job-header-container">
 
-                <div class="d-flex">
-                    <div>
-                        <img src="{{ asset('images/' . $company?->company_logo) }}" class="logo-detail">
+                <div class="row d-flex">
+                    <div class="col-md-2 d-flex justify-content-center align-items-center">
+                        <img src="{{ asset('images/' . $company?->company_logo) }}" class="logo-detail mb-3">
                     </div>
-                    <div class="ms-5">
+                    <div class="col-md-8 ms-5 job-info">
                         <h4><b>{{ $company?->company_name }}</b></h4>
                         <span class="text-muted">{{ $company?->industry }}</span>
 
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="mt-2">
-                            <span class="company-info me-1">{{ $company?->contact_email }}</span>
+                            <span class="company-info md-block me-1">{{ $company?->contact_email }}</span>
 
                             <a href="{{ $company?->website_Url }}" class="text-decoration-none text-dark company-info"><i
                                     class="fa-solid fa-globe"></i> Website</a>
@@ -68,7 +68,8 @@
                     <div class="job-opening-section pe-2 py-4">
                         <div class="py-3 px-4 mb-4 border rounded shadow-sm bg-white job-opening">
 
-                            <a href="{{ route('job.detail', $job->id) }}" class="text-decoration-none text-dark link">
+                            <div>
+                                <a href="{{ route('job.detail', $job->id) }}" class="text-decoration-none text-dark link">
                                 <h4><b>{{ $job->job_title }}</b></h4>
                             </a>
 
@@ -76,6 +77,7 @@
                                 class="text-muted me-3">{{ $job->location }}</span>
                             <i class="fa-solid fa-briefcase me-2 text-muted"></i><span
                                 class="text-muted">{{ $job->job_type }}</span>
+                            </div>
 
                             <p class="text-muted my-3">{{ Str::words($job->description, 15, '...') }}</p>
 

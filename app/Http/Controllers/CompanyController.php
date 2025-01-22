@@ -36,12 +36,12 @@ class CompanyController extends Controller
 
         return to_route('employer.profile')->with([
             'title' => 'Company Profile Created Successfully',
-            'message' => 'Your company profile has been created and linked to your profile.'
+            'message' => 'Your company profile has been created. Please wait for admin approval to access job-related features.'
         ]);
     }
 
     public function search() {
-        $companies = Company::select('*')
+        $companies = Company::where('status', 'Approved')
                     ->when(request('searchData'), function($query) {
                         $query->whereAny(['company_name', 'industry', 'location'],'like', '%'.request('searchData').'%');
                     })
@@ -95,12 +95,26 @@ class CompanyController extends Controller
             $data['company_logo'] = $oldImage;
         }
 
+        $company = Company::where('id', $request->id)->first();
+
+        if($company->status == 'Rejected') {
+            $data['status'] = 'Pending';
+        }
+
         Company::find($request->id)->update($data);
 
-        return to_route('employer.profile')->with([
-            'title' => 'Updated Successfully',
-            'message' => 'Company profile has updated successfully!.'
-        ]);
+        $messages = [
+            'Rejected' => [
+                'title' => 'Resubmitted Successfully',
+                'message' => 'Your company profile has been resubmitted for approval.',
+            ]
+        ];
+        $response = $messages[$company->status] ?? [
+            'title' => 'Company Updated Successfullly',
+            'message' => 'Company profile has been updated successfully.',
+        ];
+
+        return to_route('employer.profile')->with($response);
     }
 
     public function remove() {
@@ -128,6 +142,7 @@ class CompanyController extends Controller
 
     public function list() {
         $companies = Company::withCount('jobs')
+                    ->where('status', 'Approved')
                     ->when(request('searchData'), function($query) {
                         $query->whereAny(['company_name', 'location'],'like','%'.request('searchData').'%');
                     })
@@ -151,6 +166,11 @@ class CompanyController extends Controller
             'location' => 'required',
             'email' => 'required|unique:companies,contact_email,'.$request->id,
             'phone' => 'required'
+        ], [
+            'image.required' => 'Company logo is required.',
+            'company_name.unique' => 'Company already exists.',
+            'website_url.unique' => 'This URL already exists.',
+            'email.unique' => 'This email already exists.'
         ]);
     }
 

@@ -92,6 +92,16 @@ class EmployerController extends Controller
                 'title' => 'Error',
                 'message' => 'You do not have a company associated with your profile.'
             ]);
+        } elseif ($company->status == 'Pending') {
+            return redirect()->back()->with([
+                'title' => 'Company Profile Pending',
+                'message' => 'Your company profile is pending approval. Please wait for the admin to approve your company profile.'
+            ]);
+        } elseif ($company->status == 'Rejected') {
+            return redirect()->back()->with([
+                'title' => "You do not have access to this page.",
+                'message' => 'Your company profile has been rejected. Please resubmit your company for approval.'
+            ]);
         }
 
         $searchData = request('searchData');

@@ -1,6 +1,6 @@
 @extends('employer.layouts.master')
 
-@section('title', 'My Jobs')
+@section('title', 'Job Overview')
 
 @section('content')
     <div class="container p-5">
@@ -41,7 +41,7 @@
                         <ul class="dropdown-menu scrollable">
                             <li>
                                 <a class="dropdown-item mt-2" href="{{ route('employer.job.list') }}">
-                                    All Statuses
+                                    All Jobs
                                 </a>
                             </li>
                             <li>
@@ -64,7 +64,7 @@
                 <div class="col-12 col-lg-4">
 
                     <div
-                        class="d-flex flex-column justify-content-between px-3 pb-3 mb-4 border border-2 p-3 rounded bg-white shadow-sm">
+                        class="d-flex flex-column justify-content-between px-3 pb-3 mb-4 border-2 p-3 rounded bg-white shadow-sm">
 
                         <div>
                             <div class="d-flex justify-content-between align-items-center">
@@ -87,21 +87,26 @@
                                                 <li>
                                                 <li><a class="dropdown-item" href="{{ route('job.edit', $job->id) }}">Edit
                                                     Job</a></li>
-                                                @if ($job->status == 'Open')
+                                                @if ($job->status === 'Open')
                                                 <li>
-                                                    <form action="{{ route('job.close', $job->id) }}" method="POST">
+                                                    <form action="{{ route('job.close') }}" method="POST">
                                                         @csrf
-                                                        <button class="btn btn-link p-0 ms-3 align-baseline text-black text-decoration-none">
+                                                        <input type="hidden" name="id" value="{{ $job->id }}">
+                                                        <button class="btn btn-link p-0 ms-3 align-baseline text-dark text-decoration-none">
                                                             Close Job
                                                         </button>
+                                                    </form>
                                                 </li>
-                                                @elseif($job->status == 'Closed')
+                                                @elseif($job->status === 'Closed')
                                                     <li>
-                                                        <form action="{{ route('job.activate', $job->id) }}" method="POST">
+                                                        <form action="{{ route('job.activate') }}" method="POST">
                                                             @csrf
-                                                            <button class="btn btn-link p-0 ms-3 align-baseline text-black text-decoration-none">
+                                                            <input type="hidden" name="id" value="{{ $job->id }}">
+
+                                                            <button class="btn btn-link p-0 ms-3 align-baseline text-dark text-decoration-none">
                                                                 Reactivate Job
                                                             </button>
+                                                        </form>
                                                     </li>
                                                 @endif
                                                 <li>
@@ -132,10 +137,10 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <span class="text-muted">Posted by</span>
-                                    <span class="text-muted">{{ Auth::user()->first_name }}</span>
+                                    <span class="text-muted">{{ $job->employer->user->first_name }}</span>
                                 </div>
-                                <a href="">
-                                    <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
+                                <a href="{{route('employer.profile', $job->employer->id)}}" class="text-decoration-none text-dark link">
+                                    <img src="{{ $job->employer->user->profile_image ? asset('images/' . $job->employer->user->profile_image) : asset('images/profile.jpg') }}"
                                     class="img-fluid rounded-circle nav-profile me-3">
                                 </a>
                             </div>

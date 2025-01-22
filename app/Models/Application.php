@@ -16,12 +16,14 @@ class Application extends Model
         'first_name',
         'last_name',
         'phone',
+        'portfolio_link',
         'email',
         'resume',
         'coverletter',
         'interest',
         'expected_salary',
         'currency',
+        'salary_type',
         'status'
     ];
 

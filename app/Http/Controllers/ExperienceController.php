@@ -47,7 +47,7 @@ class ExperienceController extends Controller
         }
 
         return to_route('applicant.profile')->with([
-            'title' => 'Update Successfully',
+            'title' => 'Experience Update Successfully',
             'message' => 'Your experience details have been updated successfully.'
         ]);
     }

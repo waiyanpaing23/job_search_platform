@@ -70,12 +70,11 @@
 
 <body>
 
-    <div class="container-fluid bg-blue text-dark">
-        <div class="row p-5">
+    <div class="container-fluid bg-blue text-dark d-flex justify-content-center align-items-center">
 
-            <div class="zero-margin d-flex justify-content-center m-5">
+            <div class="row pt-4 zero-margin d-flex justify-content-center">
 
-                <div class="col-4 register-img mt-3">
+                <div class="col-12 col-lg-5 register-img border-2">
                     <h3 class="cover-text text-white">
                         Search for jobs that suit your interests and skills.
                     </h3>
@@ -84,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 py-4 px-5 bg-white mt-3 d-flex flex-column justify-content-center">
+                <div class="col-12 col-lg-5 py-4 px-5 bg-white">
 
                     <h2 class="mb-4">Register as Employer</h2>
 
@@ -159,7 +158,6 @@
                     </form>
                 </div>
             </div>
-        </div>
     </div>
 
 </body>

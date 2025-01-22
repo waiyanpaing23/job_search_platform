@@ -45,7 +45,7 @@ class EducationController extends Controller
         }
 
         return to_route('applicant.profile')->with([
-            'title' => 'Updated Successfully',
+            'title' => 'Education Updated Successfully',
             'message' => 'Your education details have been updated successfully.'
         ]);
     }

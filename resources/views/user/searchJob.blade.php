@@ -70,12 +70,6 @@
                                     Part Time
                                 </a>
                             </li>
-                            <li class="p-2 jobtype">
-                                <a href="{{ route('list', ['job_type' => 'Remote']) }}"
-                                    class="text-decoration-none text-muted">
-                                    Remote
-                                </a>
-                            </li>
                         </ul>
                         <a href="{{ route('list') }}" class="btn btn-sm pink">Clear Filter</a>
                     </div>

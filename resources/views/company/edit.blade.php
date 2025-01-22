@@ -203,10 +203,21 @@
                             </div>
                         </div>
                         <div class="row pt-4">
-                            <div class="col d-flex justify-content-between">
-                                <a href="{{ route('company.remove', $company->id) }}" class="btn btn btn-danger"><i class="fa-solid fa-link-slash"></i> Remove Company Assocation</a>
-                                <input type="submit" class="btn pink" value="Save Changes">
-                            </div>
+                            @if ($company->status == 'Approved')
+                                <div class="col d-flex justify-content-between">
+                                    <a href="{{ route('company.remove', $company->id) }}" class="btn btn btn-danger"><i
+                                            class="fa-solid fa-link-slash"></i> Remove Company Assocation</a>
+                                    <input type="submit" class="btn pink" value="Save Changes">
+                                </div>
+                            @elseif ($company->status == 'Rejected')
+                                <div class="col d-flex justify-content-end">
+                                    <input type="submit" class="btn pink" value="Resubmit Company">
+                                </div>
+                            @else
+                                <div class="col d-flex justify-content-end">
+                                    <input type="submit" class="btn pink" value="Save Changes">
+                                </div>
+                            @endif
                         </div>
 
                     </form>

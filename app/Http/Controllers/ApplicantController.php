@@ -17,15 +17,20 @@ class ApplicantController extends Controller
 
     public function index() {
         $jobs = Job::all();
-        $industries = Category::leftJoin('jobs', 'categories.id', '=', 'jobs.category_id')
+        $industries = Category::leftJoin('jobs', function ($join) {
+                    $join->on('categories.id', '=', 'jobs.category_id')
+                        ->where('jobs.status', 'Open');
+                    })
                     ->select('categories.category', DB::raw('COUNT(jobs.id) as job_count'))
                     ->groupBy('categories.id', 'categories.category')
                     ->orderByDesc('job_count')
                     ->limit(4)
                     ->get();
+
         $recommendations = $this->jobRecommendations();
 
-        $companies = Company::inRandomOrder()->limit(4)->get();
+        $companies = Company::where('status', 'Approved')
+                    ->inRandomOrder()->limit(4)->get();
 
         return view('user.dashboard', compact('jobs', 'industries', 'recommendations', 'companies'));
     }
@@ -136,10 +141,11 @@ class ApplicantController extends Controller
             $keywordsString = implode(' ', $keywords);
 
             if (!empty($keywordsString)) {
-                $recommendations = Job::whereRaw("MATCH(job_title, requirement) AGAINST (? IN NATURAL LANGUAGE MODE)", [$keywordsString])
-                    ->limit(4)->get();
+                $recommendations = Job::where('status', 'Open')
+                                    ->whereRaw("MATCH(job_title, requirement) AGAINST (? IN NATURAL LANGUAGE MODE)", [$keywordsString])
+                                    ->limit(4)->get();
             } else {
-                $recommendations = Job::inRandomOrder()->limit(4)->get();
+                $recommendations = Job::where('status', 'Open')->inRandomOrder()->limit(4)->get();
             }
         } else {
             $recommendations = '';

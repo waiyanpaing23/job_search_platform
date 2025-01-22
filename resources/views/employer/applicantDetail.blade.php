@@ -47,7 +47,7 @@
                                 <form action="{{ route('applicant.status.update', $application->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" name="status" value="Hired">
+                                    <input type="hidden" name="status" value="Rejected">
                                     <button type="submit" class="btn pink px-5">Hire</button>
                                 </form>
                             </div>

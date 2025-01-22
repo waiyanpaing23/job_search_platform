@@ -23,6 +23,18 @@ class JobController extends Controller
                 'title' => "Link Your Profile to a Company",
                 'message' => 'Please link your profile to company before posting a job.'
             ]);
+        } elseif($employer?->company->status == 'Pending') {
+
+            return to_route('employer.profile')->with([
+                'title' => "Company Profile Pending",
+                'message' => 'Your company profile is pending approval. Please wait for the admin to approve your company profile.'
+            ]);
+        } elseif($employer?->company->status == 'Rejected') {
+
+            return to_route('employer.profile')->with([
+                'title' => "You do not have access to this page.",
+                'message' => 'Your company profile has been rejected. Please resubmit your company for approval.'
+            ]);
         }
 
         $employer?->load('company');
@@ -67,6 +79,16 @@ class JobController extends Controller
                 'title' => 'Error',
                 'message' => 'You do not have a company associated with your profile.'
             ]);
+        } elseif ($company->status == 'Pending') {
+            return redirect()->back()->with([
+                'title' => 'Company Profile Pending',
+                'message' => 'Your company profile is pending approval. Please wait for the admin to approve your company profile.'
+            ]);
+        } elseif ($company->status == 'Rejected') {
+            return redirect()->back()->with([
+                'title' => "You do not have access to this page.",
+                'message' => 'Your company profile has been rejected. Please resubmit your company for approval.'
+            ]);
         }
 
         $jobs = Job::where('company_id', $company->id)
@@ -104,7 +126,8 @@ class JobController extends Controller
         ]);
     }
 
-    public function close($id) {
+    public function close(Request $request) {
+        $id = $request->id;
         Job::where('id', $id)->update(['status' => 'Closed']);
 
         return to_route('employer.job.list')->with([
@@ -113,7 +136,8 @@ class JobController extends Controller
         ]);
     }
 
-    public function activate($id) {
+    public function activate(Request $request) {
+        $id = $request->id;
         Job::where('id', $id)->update(['status' => 'Open']);
 
         return to_route('employer.job.list')->with([
@@ -125,9 +149,9 @@ class JobController extends Controller
     public function delete($id) {
         Job::where('id', $id)->delete();
 
-        return to_route('employer.job.list')->with([
+        return back()->with([
             'title' => 'Job Deleted Successfully!',
-            'message' => 'Your job post has been deleted successfully.'
+            'message' => 'Job post has been deleted successfully.'
         ]);
     }
 

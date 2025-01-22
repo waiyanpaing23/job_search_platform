@@ -16,12 +16,11 @@
 
 <body>
 
-    <div class="container-fluid bg-blue text-dark">
-        <div class="row p-5">
+    <div class="container-fluid bg-blue text-dark d-flex justify-content-center align-items-center">
 
-            <div class="zero-margin d-flex justify-content-center m-5">
+            <div class="zero-margin d-flex pt-4">
 
-                <div class="col-4 py-4 px-5 bg-white mt-4 d-flex flex-column justify-content-center">
+                <div class="col-12 col-lg-6 py-4 px-5 bg-white">
                     <h2 class="mb-4">Login as Employer</h2>
 
                     <h4>Welcome Back!</h4>
@@ -86,7 +85,7 @@
                     </a> -->
                 </div>
 
-                <div class="col-4 register-img mt-4">
+                <div class="col-12 col-lg-6 register-img border-2">
                     <h3 class="cover-text text-white">
                         Find the talent you need to elevate your team.
                     </h3>
@@ -95,7 +94,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </div>
 
 </body>

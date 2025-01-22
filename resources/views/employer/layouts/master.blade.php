@@ -99,28 +99,27 @@
     </div>
 
 
-    <div class="container-fluid bg-custom">
+    <div class="">
         @yield('content')
     </div>
 
     <footer>
-        <div class="row p-5">
-            <div class="col-3">
-                <a class="navbar-brand text-white h3" href="#">Pros<span class="path">Path</span></a>
-                <p class="mt-2">Copyright &copy; 2024, ProsPath</p>
-            </div>
-            <div class="col-3">
+        <div class="row p-5 d-flex justify-content-evenly">
+            <div class="col-6 col-md-4">
                 <h5>ProsPath</h5>
                 <a href="#">About Us</a>
                 <a href="#">Contact Us</a>
                 <a href="#">Terms and Conditions</a>
                 <a href="#">Privacy Policy</a>
             </div>
-            <div class="col-3">
-                <h5>Job Seekers</h5>
-            </div>
-            <div class="col-3">
-                <h5>Employers</h5>
+            <div class="col-12 col-md-4 order-md-first">
+                <a class="navbar-brand text-white h3" href="#">Pros<span class="path">Path</span></a>
+                <p class="mt-2">Copyright &copy; 2024, ProsPath</p>
+                <div class="mt-5">
+                    <i class="fa-brands fa-x-twitter h4 me-3"></i>
+                    <i class="fa-brands fa-linkedin h4 me-3"></i>
+                    <i class="fa-brands fa-instagram h4 me-3"></i>
+                </div>
             </div>
         </div>
     </footer>
@@ -129,16 +128,6 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content p-4">
-                {{-- <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ session('title', 'Default Title') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{ session('message', 'Default message text goes here.') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn pink" data-bs-dismiss="modal">Close</button>
-                </div> --}}
                 <h5>{{ session('title') }}</h5>
                 <p class="mt-2">{{ session('message') }}</p>
                 <div class="d-flex justify-content-end mt-2">

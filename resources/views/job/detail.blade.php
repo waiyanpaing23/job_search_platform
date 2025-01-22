@@ -23,14 +23,25 @@
     <div class="row d-flex justify-content-center">
         <div class="col-10 py-5">
 
-            <div class="border rounded px-5 py-4 shadow-sm bg-white">
+            <div class="border rounded px-5 py-4 shadow-sm bg-white job-header-container">
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex">
-                        <div>
+                <div class="row d-flex justify-content-between align-items-center job-header">
+
+                    <div class="col-md-3 d-flex justify-content-end">
+                        @if (Auth::check() && Auth::user()->role == 'user')
+                        <a href="{{ route('application', $job->id) }}" class="btn pink">Apply Now</a>
+                        @elseif (Auth::check() && Auth::user()->role == 'employer' )
+                            {{ '' }}
+                        @else
+                            <a href="{{ route('login') }}" class="btn pink">Login to Apply</a>
+                        @endif
+                    </div>
+
+                    <div class="row col-md-9 order-md-first d-flex">
+                        <div class="col-md-2 d-flex justify-content-center align-items-center my-3">
                             <img src="{{ asset('images/' . $job->company->company_logo) }}" class="logo-detail">
                         </div>
-                        <div class="ms-5">
+                        <div class="col-12 col-md-8 ms-5 job-info">
                             <h4><b>{{ $job->job_title }}</b></h4>
                             <span class="text-muted">{{ $job->company->company_name }}</span>
 
@@ -43,20 +54,12 @@
 
                         </div>
                     </div>
-
-                    @if (Auth::check() && Auth::user()->role == 'user')
-                        <a href="{{ route('application', $job->id) }}" class="btn pink">Apply Now</a>
-                    @elseif (Auth::check() && Auth::user()->role == 'employer' )
-                        {{ '' }}
-                    @else
-                        <a href="{{ route('login') }}" class="btn pink">Login to Apply</a>
-                    @endif
                 </div>
 
             </div>
 
             <div class="row">
-                <div class="col-8 pe-5">
+                <div class="col-md-8 pe-5">
                     <h4 class="mt-5 mb-4"><b>Job Description</b></h4>
 
                     <span>{{ $job->description }}</span>
@@ -82,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="mt-4 border bg-white shadow-sm rounded p-3">
                         <i class="fa-solid fa-building text-muted me-4"></i><span>{{ $job->category->category }}</span> <br>
                         <i class="fa-solid fa-calendar text-muted me-4 mt-4"></i><span>Application Deadline -

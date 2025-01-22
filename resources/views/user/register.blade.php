@@ -76,7 +76,7 @@
 
         <div class="row pt-4 zero-margin d-flex justify-content-center">
 
-            <div class="col-12 col-lg-5 register-img border border-2">
+            <div class="col-12 col-lg-5 register-img border-2">
                 <h3 class="cover-text text-white">
                     Search for jobs that suit your interests and skills.
                 </h3>
@@ -97,7 +97,7 @@
                         <div class="pe-1">
                             <div>
                                 <input class="form-control mb-1" type="text" name="firstname"
-                                    value="{{ old('firstname') }}" placeholder="First Name" required autofocus>
+                                    value="{{ old('firstname') }}" placeholder="First Name" autofocus>
                                 @error('firstname')
                                     <small class="text-sm text-danger">{{ $message }}</small>
                                 @enderror
@@ -119,7 +119,7 @@
                     <div class="mt-4">
 
                         <input class="form-control" type="email" name="email" value="{{ old('email') }}"
-                            placeholder="Email Address" required>
+                            placeholder="Email Address">
                         @error('email')
                             <small class="text-sm text-danger">{{ $message }}</small>
                         @enderror
@@ -145,7 +145,7 @@
                     <!-- Password -->
                     <div class="mt-4">
 
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        <input class="form-control" type="password" name="password" placeholder="Password">
                         @error('password')
                             <small class="text-sm text-danger">{{ $message }}</small>
                         @enderror
@@ -155,7 +155,7 @@
                     <div class="mt-4">
 
                         <input class="form-control" type="password" name="password_confirmation"
-                            placeholder="Confirm Password" required>
+                            placeholder="Confirm Password">
                         @error('password_confirmation')
                             <small class="text-sm text-danger">{{ $message }}</small>
                         @enderror

@@ -15,7 +15,7 @@
                 <form action="#" method="GET">
                     <div class="input-group mt-1 mb-4">
                         <input type="text" class="form-control input-box bg-white" name="searchData"
-                            placeholder="Search by keywords or location" aria-describedby="basic-addon2"
+                            placeholder="Search by name or email" aria-describedby="basic-addon2"
                             value="{{ old('searchData') }}">
 
                         <button type="submit" class="btn pink"><i class="fa-solid fa-magnifying-glass me-1"></i>
@@ -23,14 +23,14 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-3">
                 <ul class="navbar-nav me-auto category-filter py-1 pt-2 px-3 rounded">
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle text-muted" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             {{ request('role') && $users->firstWhere('role', request('role'))
                                 ? $users->firstWhere('role', request('role'))->role
-                                : 'Filter by Role' }}
+                                : 'Filter by User Role' }}
                         </a>
                         <ul class="dropdown-menu scrollable">
                             <li>
@@ -48,13 +48,6 @@
                                     Employers
                                 </a>
                             </li>
-                            @if (Auth::user()->role == 'superadmin')
-                            <li>
-                                <a class="dropdown-item mt-2" href="{{ route('admin.users', ['role' => 'Admins']) }}">
-                                    Admins
-                                </a>
-                            </li>
-                            @endif
                         </ul>
                     </li>
                 </ul>
@@ -77,16 +70,16 @@
                             <tr>
                                 <td class="fw-bold">{{ $loop->iteration }}</td>
                                 <td>
-                                    <a href="" class="text-decoration-none text-dark">
+                                    <div class="text-decoration-none text-dark">
                                         <div class="d-flex applicant-list align-items-center">
                                             <img src="{{ $user->profile_image ? asset('images/' . $user->profile_image) : asset('images/profile.jpg') }}"
                                                 class="img-fluid rounded-circle nav-profile me-3">
                                             <div>
-                                                <span class="d-block applicant-name">{{ $user->first_name }}
+                                                <span class="d-block">{{ $user->first_name }}
                                                     {{ $user->last_name }}</span>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </td>
                                 <td>{{ $user->email }}</td>
                                 <td>
@@ -111,8 +104,8 @@
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item text-danger"
-                                                        href="{{ route('application.list') }}">Delete User</a></li>
+                                                <li><a class="dropdown-item text-danger" onclick="return confirm('Are you sure to want to delete this user?')"
+                                                        href="{{ route('user.delete', $user->id) }}">Delete User</a></li>
                                             </ul>
                                         </li>
 
@@ -122,6 +115,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-end">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </div>

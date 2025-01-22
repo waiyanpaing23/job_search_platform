@@ -57,7 +57,7 @@ class ApplicationController extends Controller
             ]);
         };
 
-        return to_route('job.detail', ['id' => $id])->with([
+        return to_route('application.detail', ['id' => $id])->with([
             'title' => 'Application Submitted Successfully!',
             'message' => "You've successfully submitted your application. The employer will review it and reach out to you soon."
         ]);

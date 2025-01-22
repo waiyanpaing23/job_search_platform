@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid p-5">
 
-        <div class="px-5">
+        <div class="px-3">
             <h5><b>Post New Job</b></h5>
             <div class="shadow-sm rounded bg-white p-4 mt-3">
                 <form action="{{ route('job.store') }}" method="POST">
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="row pt-4">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <label for="location"><b>Location</b></label>
                             <input type="text" name="location" class="form-control mt-2 input-box @error('location') is-invalid @enderror"
                             placeholder="City, State, Country, or Remote">
@@ -50,7 +50,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <label for="salary"><b>Salary</b></label>
                             <div class="row">
                                 <div class="col-3">
@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="row pt-4">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <label for="email"><b>Contact Email</b></label>
                             <input type="email" class="form-control mt-2 input-box @error('contactEmail') is-invalid @enderror"
                             name="contactEmail" placeholder="example@yourcompany.com" value="{{ $employer->company->contact_email }}">
@@ -129,7 +129,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6 py-3">
                             <label for="expiryDate"><b>Application Deadline</b></label>
                             <input type="date" name="expiryDate" class="form-control mt-2 input-box @error('deadline') is-invalid @enderror">
                             @error('deadline')

@@ -37,13 +37,13 @@
                             <a class="nav-link" href="{{ route('admin.users') }}">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Jobs</a>
+                            <a class="nav-link" href="{{ route('admin.jobs') }}">Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('applicant.list') }}">Companies</a>
+                            <a class="nav-link" href="{{ route('admin.companies') }}">Companies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('applicant.list') }}">Applications</a>
+                            <a class="nav-link" href="{{ route('admin.applications') }}">Applications</a>
                         </li>
 
                     </ul>
@@ -59,11 +59,6 @@
                             {{ Auth::user()->first_name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href=""><i class="fa-solid fa-user me-2"></i>
-                                    Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
@@ -85,6 +80,27 @@
         @yield('content')
     </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content p-4">
+                <h5>{{ session('title') }}</h5>
+                <p class="mt-2">{{ session('message') }}</p>
+                <div class="d-flex justify-content-end mt-2">
+                    <button type="button" class="btn pink" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+
+@if (session('title') && session('message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modal.show();
+        });
+    </script>
+@endif
 
 </html>

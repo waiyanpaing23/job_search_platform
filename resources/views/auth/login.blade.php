@@ -92,7 +92,7 @@
                     <!-- Password -->
                     <div class="mt-4">
 
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        <input class="form-control" type="password" name="password" placeholder="Password">
                         @error('password')
                             <small class="text-sm text-danger">{{ $message }}</small>
                         @enderror
@@ -135,7 +135,7 @@
                 </a>
             </div>
 
-            <div class="col-12 col-lg-6 register-img border border-2">
+            <div class="col-12 col-lg-6 register-img border-2">
                 <h3 class="cover-text text-white">
                     Search for jobs that suit your interests and skills.
                 </h3>

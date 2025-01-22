@@ -7,7 +7,7 @@
     <div class="container p-4">
         <div class="row">
             <div>
-                <h4 class="fw-bold">Job Post Management</h4>
+                <h4 class="fw-bold">Application Management</h4>
             </div>
         </div>
         <div class="row pt-3 d-flex justify-content-between">
@@ -15,7 +15,7 @@
                 <form action="#" method="GET">
                     <div class="input-group mt-1 mb-4">
                         <input type="text" class="form-control input-box bg-white" name="searchData"
-                            placeholder="Search by keywords or location" aria-describedby="basic-addon2"
+                            placeholder="Search by keywords or company" aria-describedby="basic-addon2"
                             value="{{ old('searchData') }}">
 
                         <button type="submit" class="btn pink"><i class="fa-solid fa-magnifying-glass me-1"></i>
@@ -23,60 +23,33 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-lg-6 col-md-8 pb-3">
+            <div class="col-12 col-lg-3 col-md-8 pb-3">
                 <div class="row">
                     <div class="col">
                         <ul class="navbar-nav me-auto category-filter py-1 pt-2 px-3 rounded bg-white">
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle text-muted" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    {{ request('status') && $jobs->firstWhere('status', request('status'))
-                                        ? $jobs->firstWhere('status', request('status'))->status
+                                    {{ request('status') && $applications->firstWhere('status', request('status'))
+                                        ? $applications->firstWhere('status', request('status'))->status
                                         : 'Filter by Status' }}
                                 </a>
                                 <ul class="dropdown-menu scrollable">
                                     <li>
                                         <a class="dropdown-item mt-2" href="{{ route('admin.jobs') }}">
-                                            All Jobs
+                                            All Applications
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item mt-2" href="{{ route('admin.jobs', ['status' => 'Open']) }}">
-                                            Active Jobs
+                                        <a class="dropdown-item mt-2" href="{{ route('admin.jobs', ['status' => 'Pending']) }}">
+                                            Pending
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item mt-2" href="{{ route('admin.jobs', ['status' => 'Closed']) }}">
-                                            Closed Jobs
+                                        <a class="dropdown-item mt-2" href="{{ route('admin.jobs', ['status' => 'Interview']) }}">
+                                            Interview Scheduled
                                         </a>
                                     </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <ul class="navbar-nav me-auto category-filter py-1 pt-2 px-3 rounded bg-white">
-                            <li class="nav-item dropdown">
-                                <a class="dropdown-toggle text-muted" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    {{ request('category') && $jobs->firstWhere('category_id', request('category'))
-                                        ? $jobs->firstWhere('category_id', request('category'))->category->category
-                                        : 'Filter by Category' }}
-                                </a>
-                                <ul class="dropdown-menu scrollable">
-                                    <li>
-                                        <a class="dropdown-item mt-2" href="{{ route('admin.jobs') }}">
-                                            All Jobs
-                                        </a>
-                                    </li>
-                                    @foreach ($categories as $category)
-                                        <li>
-                                            <a class="dropdown-item mt-2"
-                                                href="{{ route('admin.jobs', ['category' => $category->id]) }}">
-                                                {{ $category->category }}
-                                            </a>
-                                        </li>
-                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
@@ -90,27 +63,27 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Job Title</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Applicant</th>
                             <th scope="col">Company</th>
-                            <th scope="col">Job Type</th>
                             <th scope="col">Location</th>
+                            <th scope="col">Submitted on</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Applicants</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($jobs as $job)
+                        @foreach ($applications as $application)
                             <tr>
                                 <td class="fw-bold">{{ $loop->iteration }}</td>
-                                <td>{{ $job->job_title }}</td>
-                                <td>{{ $job->company->company_name }}</td>
-                                <td>{{ $job->job_type }}</td>
-                                <td>{{ $job->location }}</td>
+                                <td>{{ $application->job->job_title }}</td>
+                                <td>{{ $application->first_name }} {{ $application->last_name }}</td>
+                                <td>{{ $application->job->company->company_name }}</td>
+                                <td>{{ $application->job->location }}</td>
+                                <td>{{ \Carbon\Carbon::parse($application->created_at)->format('d-m-Y') }}</td>
                                 <td>
-                                    <span class="badge border border-secondary text-dark">{{ $job->status }}</span>
+                                    <span class="badge border border-secondary text-dark">{{ $application->status }}</span>
                                 </td>
-                                <td class="text-center">{{ $job->applications->count() }}</td>
                                 <td>
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item dropdown">
@@ -119,14 +92,10 @@
                                                 <i class="fa-solid fa-ellipsis-vertical text-black"></i>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="{{ route('job.detail', $job->id) }}">View
-                                                        Details</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
                                                 </li>
                                                 <li><a class="dropdown-item text-danger"
-                                                        href="{{ route('job.delete', $job->id) }}"
-                                                        onclick="return confirm('Are you sure to want to delete this job?')">Delete Job</a></li>
+                                                        href="{{ route('application.delete', $application->id) }}"
+                                                        onclick="return confirm('Are you sure to want to delete this application?')">Delete Application</a></li>
                                             </ul>
                                         </li>
 
@@ -137,7 +106,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                    {{ $jobs->links() }}
+                    {{ $applications->links() }}
                 </div>
             </div>
         </div>

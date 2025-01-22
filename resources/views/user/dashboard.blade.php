@@ -15,7 +15,7 @@
         .heading {
             /* background: radial-gradient(circle, rgb(71, 71, 194), rgb(32, 32, 113)); */
             background-image: url('/images/earth_bg.jpg');
-            background-color: rgb(30, 30, 30);
+            background-color: rgb(60, 60, 60);
             background-blend-mode: multiply;
             /* background: radial-gradient(circle, rgb(41, 40, 40), rgb(18, 18, 18)); */
         }

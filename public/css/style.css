@@ -10,6 +10,10 @@ div {
 nav{
     border-bottom: 1px solid #d5d5d5;
 }
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* White icon */
+}
+
 *{
     line-height: 26px;
 }
@@ -221,7 +225,7 @@ footer .row{
 }
 textarea, .category-filter, .input-file, .input-box{
     border: 1px solid #c0c0c0 !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 select{
     border: 1px solid #cacaca;
@@ -275,6 +279,10 @@ textarea:focus, .input-box:focus{
 }
 .logo-detail{
     height: 100px;
+    width: fit-content;
+}
+.logo-small{
+    height: 50px;
     width: fit-content;
 }
 .nav-profile{
@@ -331,6 +339,9 @@ ul{
     text-decoration: underline !important;
 }
 @media(max-width:1000px) {
+    .container-fluid, .job-header-container{
+        padding: 20px 0px !important;
+    }
     .img-slider{
         display: none;
     }
@@ -349,4 +360,16 @@ ul{
     .register-img{
         display: none;
     }
+    .job-info{
+        margin: 0 !important;
+    }
+    .md-block{
+        width: fit-content !important;
+        display: block !important;
+        margin-bottom: 10px !important;
+    }
+    .job-opening-section{
+        width: 100%;
+    }
+
 }
