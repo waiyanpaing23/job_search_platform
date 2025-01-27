@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="row d-flex align-items-center">
-                            <div class="col-2">
+                            <div class="col-md-2">
                                 <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
                                     class="img-fluid rounded-circle profile my-4"><br>
                             </div>

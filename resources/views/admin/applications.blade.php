@@ -58,13 +58,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col table-container">
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Position</th>
                             <th scope="col">Applicant</th>
+                            <th scope="col">Position</th>
                             <th scope="col">Company</th>
                             <th scope="col">Location</th>
                             <th scope="col">Submitted on</th>
@@ -76,8 +76,19 @@
                         @foreach ($applications as $application)
                             <tr>
                                 <td class="fw-bold">{{ $loop->iteration }}</td>
+                                <td>
+                                    <a href="{{route('applicant.profile.view', $application->applicant->id)}}" class="text-decoration-none text-dark">
+                                        <div class="d-flex applicant-list">
+                                            <img src="{{ $application->applicant->user->profile_image ? asset('images/' . $application->applicant->user->profile_image) : asset('images/profile.jpg') }}"
+                                            class="img-fluid rounded-circle nav-profile me-3">
+                                            <div>
+                                                <span class="d-block applicant-name">{{ $application->first_name }} {{ $application->last_name }}</span>
+                                                <span class="text-muted">{{ $application->email }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
                                 <td>{{ $application->job->job_title }}</td>
-                                <td>{{ $application->first_name }} {{ $application->last_name }}</td>
                                 <td>{{ $application->job->company->company_name }}</td>
                                 <td>{{ $application->job->location }}</td>
                                 <td>{{ \Carbon\Carbon::parse($application->created_at)->format('d-m-Y') }}</td>

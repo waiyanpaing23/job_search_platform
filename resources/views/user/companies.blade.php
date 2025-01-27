@@ -44,7 +44,7 @@
 
 @section('heading')
     <div class="slider-home row d-flex align-items-center px-3">
-        <div class="col-12 col-md-8 p-5">
+        <div class="col-12 col-md-8 p-5 companies">
             <h2 class="text-white mx-5 mb-5">Connect with companies that value your potential</h2>
             <div class="row px-5">
                 <div class="col-12 col-md-6">
@@ -103,7 +103,7 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <a href="{{ route('company.detail', $company->id) }}" class="text-decoration-none text-dark">
                             <div class=" p-3 my-4 border-2 border-secondary-subtle border-radius bg-white">
-                                <img src="{{ asset('images/' . $company->company_logo) }}" class="img-fluid w-50 my-3">
+                                <img src="{{ asset('images/' . $company->company_logo) }}" class="img-fluid company-logo my-3">
                                 <div class="company-container">
                                     <h5>{{ $company->company_name }}</h5>
                                     <span class="text-muted d-block mb-2">{{ $company->industry }}</span>

@@ -133,7 +133,7 @@ class CompanyController extends Controller
     public function detail($id) {
         $company = Company::where('id', $id)->first();
         $jobs = Job::where('status', 'Open')
-                ->whereHas('employer', function ($query) use ($id) {
+                ->whereHas('company', function ($query) use ($id) {
                     $query->where('id', $id);
         })->get();
 

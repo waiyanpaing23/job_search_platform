@@ -168,7 +168,8 @@
 
                     <!-- Link to Login -->
                     <div class="mt-3">
-                        <p>Already registered? <a href="{{ route('login') }}">Click here to login.</a></p>
+                        <span class="d-block">Already registered? <a href="{{ route('login') }}">Click here to login.</a></span>
+                        <a href="{{ route('employer.register') }}" class="text-decoration-none">Register as Employer</a>
                     </div>
                 </form>
                 <hr class="my-4">

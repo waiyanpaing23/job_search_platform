@@ -129,7 +129,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-12 col-md-6 py-3">
+                        <div class="col-12 col-md-6">
                             <label for="expiryDate"><b>Application Deadline</b></label>
                             <input type="date" name="expiryDate" class="form-control mt-2 input-box @error('deadline') is-invalid @enderror">
                             @error('deadline')

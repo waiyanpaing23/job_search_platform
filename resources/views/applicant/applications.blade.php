@@ -6,27 +6,27 @@
     <div class="container px-5 py-4">
         <h3 class="fw-bold mb-4">My Applications</h3>
         <div class="row pt-1">
-            <div class="col-4">
-                <div class="p-3 border border-2 bg-white shadow-sm rounded">
+            <div class="col-md-4">
+                <div class="p-3 border-2 bg-white shadow-sm rounded">
                     <span class="fw-bold">Total Applications</span>
                     <h4 class="mt-2 fw-bold text-custom">{{ $applications->count() }}</h4>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="p-3 border border-2 bg-white shadow-sm rounded">
+            <div class="col-md-4">
+                <div class="p-3 border-2 bg-white shadow-sm rounded">
                     <span class="fw-bold">Reviewed</span>
                     <h4 class="mt-2 fw-bold text-custom">{{ $reviewed->count() }}</h4>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="p-3 border border-2 bg-white shadow-sm rounded">
+            <div class="col-md-4">
+                <div class="p-3 border-2 bg-white shadow-sm rounded">
                     <span class="fw-bold">Interview Scheduled</span>
                     <h4 class="mt-2 fw-bold text-custom">{{ $interview->count() }}</h4>
                 </div>
             </div>
         </div>
         <div class="row d-flex justify-content-end pt-5">
-            <div class="col-4">
+            <div class="col-md-4">
                 <form action="#" method="GET">
                     <div class="input-group mt-2 mb-3">
                         <input list="keyword" class="form-control search-box bg-white" name="searchData"
@@ -45,7 +45,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
                 {{-- py-1 pt-2 px-3 --}}
                 <ul class="navbar-nav me-auto category-filter search-box rounded">
                     <li class="nav-item dropdown">
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col table-container">
                 <table class="table mt-5">
                     <thead>
                         <tr>

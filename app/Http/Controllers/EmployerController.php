@@ -178,7 +178,6 @@ class EmployerController extends Controller
     {
         $request->validate([
             'firstname' => 'required',
-            'lastname' => 'required',
             'email' => 'required|unique:users,email,'.Auth::user()->id
         ]);
     }

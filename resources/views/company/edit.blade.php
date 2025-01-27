@@ -5,75 +5,24 @@
 @endsection
 
 @section('content')
-    <div class="container p-5">
+    <div class="container-fluid p-5">
 
         <div class="row d-flex justify-content-center">
 
-            {{-- <div class="col">
-
-                <h4><b>Personal Profile</b></h4>
-
-                <div class="p-4 rounded border">
-
-                    <div class="row d-flex align-items-center">
-                        <div class="col-4">
-                            <img src="{{ asset('images/jobseeker.png') }}" class="img-fluid rounded-circle bg-primary my-4"><br>
-                        </div>
-                        <div class="col-8">
-                            <h5><b>{{ Auth::user()->name }}</b></h5>
-                        </div>
-                    </div>
-
-                    <div class="ms-2">
-                        <p class="text-muted"><i class="fa-solid fa-envelope me-2" ></i> {{ Auth::user()->email }}</p>
-                        <p class="text-muted"><i class="fa-solid fa-phone me-2" ></i> {{ Auth::user()->email }}</p>
-                        <p class="text-muted"><i class="fa-solid fa-building me-2" ></i> {{ Auth::user()->email }}</p>
-                    </div>
-
-                </div>
-
-                <div class="p-4 mt-4 rounded border">
-                    <h4><b>Company Profile</b></h4>
-
-                    <div class="row d-flex align-items-center">
-                        <div class="col-4">
-                            <img src="{{ asset('images/'.$employer->company->company_logo) }}" class="img-fluid rounded-circle bg-primary my-4"><br>
-                        </div>
-                        <div class="col-8">
-                            <h5><b>{{ $employer->company->company_name }}</b></h5>
-                            <p class="text-muted">{{ $employer->company->industry }} Company</p>
-                        </div>
-                    </div>
-
-                    <div class="ms-2">
-                        <p class="text-muted"><i class="fa-solid fa-location-dot me-2"></i> {{ $employer->company->location }}</p>
-                        <p class="text-muted"><i class="fa-solid fa-phone me-2" ></i> {{ $employer->company->phone }}</p>
-                        <p class="text-muted"><i class="fa-solid fa-envelope me-2" ></i> {{ $employer->company->contact_email }}</p>
-                        <p class="text-muted"><i class="fa-solid fa-user-group me-2" ></i> Around {{ $employer->company->company_size }} employees</p>
-                        <p>{{$employer->company->company_description}}</p>
-                    </div>
-
-                </div>
-
-            </div> --}}
             <div class="col-12 col-lg-8">
 
                 <a href="{{ route('employer.profile') }}" class="text-dark"><i class="fa-solid fa-arrow-left h3"></i></a>
-
                 <h3 class="my-4"><b>Edit Company Profile</b></h3>
 
                 <div class="p-4 border rounded">
-
                     <h5><b>Manage Company Information</b></h5>
-
                     <form action="{{ route('company.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
                         <input type="hidden" name="id" value="{{ $company->id }}">
                         <input type="hidden" name="oldImage" value="{{ $company->company_logo }}">
 
                         <div class="row pt-3">
-                            <div class="col-6 d-flex flex-column">
+                            <div class="col-md-6 d-flex flex-column">
                                 <img src="{{ $company->company_logo ? asset('images/' . $company->company_logo) : asset('images/default_image.png') }}"
                                     class="my-3" name="logo" id="image">
                                 <input type="file" class="form-control input-file py-2 my-4" name="image"
@@ -204,8 +153,8 @@
                         </div>
                         <div class="row pt-4">
                             @if ($company->status == 'Approved')
-                                <div class="col d-flex justify-content-between">
-                                    <a href="{{ route('company.remove', $company->id) }}" class="btn btn btn-danger"><i
+                                <div class="col d-flex justify-content-between align-items-center md-block">
+                                    <a href="{{ route('company.remove', $company->id) }}" class="btn btn btn-danger mb-3"><i
                                             class="fa-solid fa-link-slash"></i> Remove Company Assocation</a>
                                     <input type="submit" class="btn pink" value="Save Changes">
                                 </div>

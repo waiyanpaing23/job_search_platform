@@ -144,6 +144,10 @@ class ApplicantController extends Controller
                 $recommendations = Job::where('status', 'Open')
                                     ->whereRaw("MATCH(job_title, requirement) AGAINST (? IN NATURAL LANGUAGE MODE)", [$keywordsString])
                                     ->limit(4)->get();
+
+                if ($recommendations->count() < 1) {
+                    $recommendations = Job::where('status', 'Open')->inRandomOrder()->limit(4)->get();
+                }
             } else {
                 $recommendations = Job::where('status', 'Open')->inRandomOrder()->limit(4)->get();
             }

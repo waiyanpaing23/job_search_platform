@@ -26,8 +26,8 @@
 @endsection
 
 @section('text')
-<div class="row text px-5">
-    <div class="col-md-5 p-5">
+<div class="slider-home row text px-5">
+    <div class="col-md-5 p-5 auth">
         <h2>Find the Perfect Candidates for Your Next Big Project!</h2>
         <p class="mt-4 subtext">Connect with skilled professionals who match your company’s needs. Start posting jobs today!</p>
         @if(Auth::check())

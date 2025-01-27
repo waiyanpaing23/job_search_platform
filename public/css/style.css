@@ -338,6 +338,15 @@ ul{
 .applicant-name:hover{
     text-decoration: underline !important;
 }
+.table-container{
+    overflow-y: auto;
+}
+.table{
+    min-width: 600px !important;
+}
+.company-table{
+    min-width: 1100px !important;
+}
 @media(max-width:1000px) {
     .container-fluid, .job-header-container{
         padding: 20px 0px !important;
@@ -346,7 +355,7 @@ ul{
         display: none;
     }
     .slider-home{
-        height: fit-content;
+        min-height: fit-content !important;
     }
     .slider-home div h1{
         margin: 0 !important;
@@ -371,5 +380,7 @@ ul{
     .job-opening-section{
         width: 100%;
     }
-
+    .companies{
+        padding: 0 !important;
+    }
 }

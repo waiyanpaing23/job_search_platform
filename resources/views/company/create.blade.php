@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-6 d-flex flex-column">
+                            <div class="col-md-6 d-flex flex-column">
                                 <label class="mt-3"><b>Company Logo</b></label>
                                 <img src="{{ asset('images/default_image.png') }}" class="mt-2 logo-create" name="logo"
                                     id="image">

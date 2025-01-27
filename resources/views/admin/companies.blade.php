@@ -52,8 +52,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <table class="table table-hover">
+            <div class="col table-container">
+                <table class="table table-hover company-table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

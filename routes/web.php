@@ -1,18 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SocialiteController;
-use App\Http\Controllers\UserController;
-use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,20 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     $jobs = Job::all();
-
-//     return view('user.dashboard', compact('jobs'));
-// })->name('user.dashboard');
-
 Route::get('/', [ApplicantController::class, 'index'])->name('user.dashboard');
 
 Route::get('job/search', [ApplicantController::class, 'jobList'])->name('list');
 Route::get('job/{id}', [JobController::class, 'detail'])->name('job.detail');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,8 +35,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('job/{id}/application', [ApplicationController::class, 'application'])->name('application');
     ROute::post('job/{id}/application/submit', [ApplicationController::class, 'submitApplication'])->name('application.submit');
-
-    // Route::get('home', [UserController::class, 'index'])->name('home')->middleware('user');
 
     Route::prefix('applicant')->middleware('applicant')->group( function() {
         Route::get('profile', [ApplicantController::class, 'profile'])->name('applicant.profile');

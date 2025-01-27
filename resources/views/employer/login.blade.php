@@ -20,7 +20,7 @@
 
             <div class="zero-margin d-flex pt-4">
 
-                <div class="col-12 col-lg-6 py-4 px-5 bg-white">
+                <div class="col-12 col-lg-6 py-4 px-5 bg-white d-flex flex-column justify-content-center">
                     <h2 class="mb-4">Login as Employer</h2>
 
                     <h4>Welcome Back!</h4>
@@ -73,7 +73,8 @@
 
                         <!-- Link to Login -->
                         <div class="mt-4">
-                            <p>Don't have an account? <a href="{{ route('employer.register') }}">Register now.</a></p>
+                            <span class="d-block">Don't have an account? <a href="{{ route('employer.register') }}">Register now.</a></span>
+                            <a href="{{ route('login') }}" class="text-decoration-none">Login as Applicant</a>
                         </div>
                     </form>
                     <!-- <hr class="my-4">

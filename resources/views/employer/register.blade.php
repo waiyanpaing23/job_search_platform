@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-lg-5 py-4 px-5 bg-white">
+                <div class="col-12 col-lg-5 py-4 px-5 bg-white d-flex flex-column justify-content-center">
 
                     <h2 class="mb-4">Register as Employer</h2>
 
@@ -153,7 +153,8 @@
 
                         <!-- Link to Login -->
                         <div class="mt-3">
-                            <p>Already registered? <a href="{{ route('employer.login') }}">Click here to login.</a></p>
+                            <span class="d-block">Already registered? <a href="{{ route('employer.login') }}">Click here to login.</a></span>
+                            <a href="{{ route('register') }}" class="text-decoration-none">Register as Applicant</a>
                         </div>
                     </form>
                 </div>

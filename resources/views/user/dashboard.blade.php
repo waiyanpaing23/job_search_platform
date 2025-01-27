@@ -31,7 +31,7 @@
         <div class="col-12 col-md-5 p-5">
             <h1 class="text-white mx-5 mb-5">Find the most exciting jobs for your career</h1>
             <form action="{{ route('list') }}" method="GET">
-                <div class="input-group ms-5">
+                <div class="input-group ms-5 mt-5">
                     <input list="keyword" class="form-control search" name="searchData"
                         placeholder="Search by keywords or location" aria-describedby="basic-addon2">
                     <datalist id="keyword">
@@ -57,9 +57,9 @@
                 <h4 class="mb-4">Featured Jobs</h4>
                 <div class="row">
                     @foreach ($recommendations as $job)
-                        <div class="col-3">
+                        <div class="col-md-3">
                             <a href="{{ route('job.detail', $job->id) }}" class="text-decoration-none text-dark">
-                                <div class=" p-4 my-4 border border-2 border-secondary-subtle rounded bg-white">
+                                <div class="border border-2 border-secondary-subtle p-4 my-4 rounded bg-white">
                                     <h5>{{ $job->job_title }}</h5>
 
                                     <p>{{ $job->company->company_name }}</p>

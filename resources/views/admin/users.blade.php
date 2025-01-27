@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col table-container">
                 <table class="table table-hover">
                     <thead>
                         <tr>
