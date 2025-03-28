@@ -121,12 +121,6 @@
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="{{ route('job.detail', $job->id) }}">View
                                                         Details</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item text-danger"
-                                                        href="{{ route('job.delete', $job->id) }}"
-                                                        onclick="return confirm('Are you sure to want to delete this job?')">Delete Job</a></li>
                                             </ul>
                                         </li>
 

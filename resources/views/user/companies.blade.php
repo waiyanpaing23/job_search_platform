@@ -31,11 +31,9 @@
         }
 
         .heading {
-            /* background: radial-gradient(circle, rgb(71, 71, 194), rgb(32, 32, 113)); */
             background-image: url('/images/earth_bg.jpg');
             background-color: rgb(60, 60, 60);
             background-blend-mode: multiply;
-            /* background: radial-gradient(circle, rgb(41, 40, 40), rgb(18, 18, 18)); */
         }
     </style>
 @endsection
@@ -60,7 +58,6 @@
                                 @endforeach
                             </datalist>
 
-                            {{-- <input type="submit" class="btn pink" value="Search"> --}}
                             <button type="submit" class="btn pink"><i class="fa-solid fa-magnifying-glass me-1"></i>
                                 Search</button>
                         </div>
@@ -102,7 +99,7 @@
                     @foreach ($companies as $company)
                     <div class="col-12 col-sm-6 col-lg-3">
                         <a href="{{ route('company.detail', $company->id) }}" class="text-decoration-none text-dark">
-                            <div class=" p-3 my-4 border-2 border-secondary-subtle border-radius bg-white">
+                            <div class=" p-3 my-4 border border-2 border-secondary-subtle border-radius bg-white">
                                 <img src="{{ asset('images/' . $company->company_logo) }}" class="img-fluid company-logo my-3">
                                 <div class="company-container">
                                     <h5>{{ $company->company_name }}</h5>

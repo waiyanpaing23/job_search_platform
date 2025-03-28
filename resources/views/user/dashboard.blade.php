@@ -13,11 +13,9 @@
         }
 
         .heading {
-            /* background: radial-gradient(circle, rgb(71, 71, 194), rgb(32, 32, 113)); */
             background-image: url('/images/earth_bg.jpg');
             background-color: rgb(60, 60, 60);
             background-blend-mode: multiply;
-            /* background: radial-gradient(circle, rgb(41, 40, 40), rgb(18, 18, 18)); */
         }
     </style>
 @endsection
@@ -43,9 +41,6 @@
                 </div>
             </form>
         </div>
-        {{-- <div class="col-12 col-md-5 img-slider">
-        <img src="{{ asset('images/person1.png') }}" class="img-fluid home-img">
-    </div> --}}
     </div>
 @endsection
 
@@ -60,7 +55,7 @@
                         <div class="col-md-3">
                             <a href="{{ route('job.detail', $job->id) }}" class="text-decoration-none text-dark">
                                 <div class="border border-2 border-secondary-subtle p-4 my-4 rounded bg-white">
-                                    <h5>{{ $job->job_title }}</h5>
+                                    <h5 class="text-black">{{ $job->job_title }}</h5>
 
                                     <p>{{ $job->company->company_name }}</p>
 

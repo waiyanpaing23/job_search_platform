@@ -106,35 +106,31 @@
                                                         href="{{ route('company.detail', $company->id) }}">View
                                                         Company Profile</a></li>
                                                 <li>
-                                                @if ($company->status == 'Pending')
+                                                    @if ($company->status == 'Pending')
                                                 <li>
-                                                    <form action="{{ route('company.status.update', $company->id) }}" method="POST">
+                                                    <form action="{{ route('company.status.update', $company->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('PATCH')
                                                         <input type="hidden" name="status" value="Approved">
-                                                        <button type="submit" class="btn btn-link text-decoration-none text-dark">Approve
+                                                        <button type="submit"
+                                                            class="btn btn-link text-decoration-none text-dark">Approve
                                                             Company</button>
                                                     </form>
                                                 </li>
                                                 <li>
-                                                    <form action="{{ route('company.status.update', $company->id) }}" method="POST">
+                                                    <form action="{{ route('company.status.update', $company->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('PATCH')
                                                         <input type="hidden" name="status" value="Rejected">
-                                                        <button type="submit" class="btn btn-link text-decoration-none text-dark">Reject
+                                                        <button type="submit"
+                                                            class="btn btn-link text-decoration-none text-dark">Reject
                                                             Company</button>
                                                     </form>
                                                 </li>
-                                                @endif
-                                                <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item text-danger"
-                                                href="{{ route('job.delete', $company->id) }}"
-                                                onclick="return confirm('Are you sure to want to delete this company?')">Delete
-                                                Company</a></li>
-                                    </ul>
-                                    </li>
-
+                                            @endif
+                                         </li>
                                     </ul>
                                 </td>
                             </tr>

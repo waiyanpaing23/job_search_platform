@@ -3,7 +3,6 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobController;
-use App\Models\Employer;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('employer')->group( function() {

@@ -22,7 +22,6 @@
                                     @endforeach
                                 </datalist>
 
-                                {{-- <input type="submit" class="btn pink" value="Search"> --}}
                                 <button type="submit" class="btn pink"><i
                                         class="fa-solid fa-magnifying-glass"></i></button>
                             </div>

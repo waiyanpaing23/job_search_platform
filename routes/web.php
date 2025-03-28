@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('profile/image/remove', [ProfileController::class, 'removeImage'])->name('profile.image.remove');
 
     Route::get('job/{id}/application', [ApplicationController::class, 'application'])->name('application');
-    ROute::post('job/{id}/application/submit', [ApplicationController::class, 'submitApplication'])->name('application.submit');
+    Route::post('job/{id}/application/submit', [ApplicationController::class, 'submitApplication'])->name('application.submit');
 
     Route::prefix('applicant')->middleware('applicant')->group( function() {
         Route::get('profile', [ApplicantController::class, 'profile'])->name('applicant.profile');
@@ -67,4 +67,3 @@ require __DIR__.'/admin.php';
 Route::get('/auth/{provider}/redirect', [SocialiteController::class, 'redirect']);
 
 Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback']);
-

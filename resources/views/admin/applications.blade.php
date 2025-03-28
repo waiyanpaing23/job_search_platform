@@ -69,7 +69,6 @@
                             <th scope="col">Location</th>
                             <th scope="col">Submitted on</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,23 +93,6 @@
                                 <td>{{ \Carbon\Carbon::parse($application->created_at)->format('d-m-Y') }}</td>
                                 <td>
                                     <span class="badge border border-secondary text-dark">{{ $application->status }}</span>
-                                </td>
-                                <td>
-                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                        <li class="nav-item dropdown">
-                                            <a href="#" class="nav-link px-3" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                <i class="fa-solid fa-ellipsis-vertical text-black"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                </li>
-                                                <li><a class="dropdown-item text-danger"
-                                                        href="{{ route('application.delete', $application->id) }}"
-                                                        onclick="return confirm('Are you sure to want to delete this application?')">Delete Application</a></li>
-                                            </ul>
-                                        </li>
-
-                                    </ul>
                                 </td>
                             </tr>
                         @endforeach

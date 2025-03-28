@@ -32,7 +32,7 @@
                     <!-- Email Address -->
                     <div class="mt-4">
 
-                        <input class="form-control" type="email" name="email" value="{{ old('email') }}"
+                        <input class="form-control" type="text" name="email" value="{{ old('email') }}"
                             placeholder="Email Address" required>
                         @error('email')
                             <small class="text-sm text-danger">{{ $message }}</small>

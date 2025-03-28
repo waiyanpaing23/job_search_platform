@@ -231,7 +231,6 @@
             eduContent.style.display = 'none';
             skillsContent.style.display = 'none';
 
-            // Add click events to the buttons
             aboutBtn.addEventListener('click', function() {
                 showContent('aboutContent');
             });
@@ -248,15 +247,11 @@
                 showContent('skillsContent');
             });
 
-            // Function to show the relevant content and hide others
             function showContent(contentId) {
-                // Hide all content sections
                 const contents = document.querySelectorAll('.content');
                 contents.forEach(function(content) {
                     content.style.display = 'none';
                 });
-
-                // Show the selected content
                 const selectedContent = document.getElementById(contentId);
                 selectedContent.style.display = 'block';
             }

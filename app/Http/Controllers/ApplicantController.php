@@ -18,7 +18,7 @@ class ApplicantController extends Controller
     public function index() {
         $jobs = Job::all();
         $industries = Category::leftJoin('jobs', function ($join) {
-                    $join->on('categories.id', '=', 'jobs.category_id')
+                        $join->on('categories.id', '=', 'jobs.category_id')
                         ->where('jobs.status', 'Open');
                     })
                     ->select('categories.category', DB::raw('COUNT(jobs.id) as job_count'))
@@ -27,7 +27,7 @@ class ApplicantController extends Controller
                     ->limit(4)
                     ->get();
 
-        $recommendations = $this->jobRecommendations();
+        $recommendations = Job::where('status', 'Open')->inRandomOrder()->limit(4)->get();
 
         $companies = Company::where('status', 'Approved')
                     ->inRandomOrder()->limit(4)->get();

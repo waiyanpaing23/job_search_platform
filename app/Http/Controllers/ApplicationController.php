@@ -57,7 +57,7 @@ class ApplicationController extends Controller
             ]);
         };
 
-        return to_route('application.detail', ['id' => $id])->with([
+        return to_route('application.list')->with([
             'title' => 'Application Submitted Successfully!',
             'message' => "You've successfully submitted your application. The employer will review it and reach out to you soon."
         ]);
@@ -116,7 +116,6 @@ class ApplicationController extends Controller
             'phone' => 'required',
             'resume' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
             'coverLetter' => 'required',
-            'interest' => 'required'
         ]);
     }
 }

@@ -10,16 +10,12 @@
             <div class="row d-flex justify-content-center">
 
                 <div class="col-12 col-lg-9">
-
                     <a href="{{ route('applicant.profile') }}" class="text-dark"><i class="fa-solid fa-arrow-left h3"></i></a>
-
 
                     <div class="border border-radius bg-white mt-3">
 
                         <h4 class="p-4 bg-dark text-white header"><b>Edit Profile</b></h4>
-
                         <div class="row">
-
                             <div class="row d-flex align-items-center">
                                 <div class="col-md-2">
                                     <img src="{{ Auth::user()->profile_image ? asset('images/' . Auth::user()->profile_image) : asset('images/profile.jpg') }}"
@@ -50,7 +46,6 @@
 
                         <form action="{{ route('applicant.profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
                             <div class="btn-group bg-white w-100" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
                                     checked>
@@ -65,8 +60,6 @@
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
                                 <label class="btn tab" for="btnradio4">Skills</label>
                             </div>
-
-
                             <div class="content p-4 border rounded bg-white mt-3" id="aboutContent">
                                 <h4 class="fw-bold mb-4">Personal Information</h4>
                                 <div class="row">
@@ -95,7 +88,6 @@
                                         <label for="name" class="mb-2 fw-semibold">Personal Email</label>
                                         <input type="text" value="{{ Auth::user()->email }}" name="email"
                                             class="form-control input-box rounded w-100 px-3 mb-4">
-                                        {{-- <p>{{ Auth::user()->email }}</p> --}}
                                     </div>
                                 </div>
 
@@ -104,14 +96,12 @@
                                         <label for="name" class="mb-2 fw-semibold">Phone Number</label>
                                         <input type="text" value="{{ $applicant->phone }}" name="phone"
                                             class="form-control input-box rounded w-100 px-3 mb-4">
-                                        {{-- <p>{{ $applicant->phone ? $applicant->phone : '-' }}</p> --}}
                                     </div>
 
                                     <div class="col-12 col-sm-6">
                                         <label for="name" class="mb-2 fw-semibold">Location</label>
                                         <input type="text" value="{{ $applicant->address }}" name="address"
                                             class="form-control input-box rounded w-100 px-3 mb-4">
-                                        {{-- <p>{{ $applicant->phone ? $applicant->phone : '-' }}</p> --}}
                                     </div>
                                 </div>
 
@@ -245,8 +235,6 @@
                                     <button type="submit" class="btn pink">Save Changes</button>
                                 </div>
                             </form>
-
-
                         </div>
 
                         {{-- Education tab --}}
@@ -337,14 +325,6 @@
                         <div class="content p-4 border rounded bg-white mt-3" id="skillsContent">
                             <h4 class="fw-bold mb-4">Skills</h4>
                             <div class="skills mb-4 px-3" id="applicant_skills">
-                                {{-- @foreach ($applicant->skills as $skill)
-                                    <div class="py-1 px-3 me-2 mb-3 rounded-pill bg-cyan">
-                                        <span>{{ $skill->skill }}</span>
-                                        <button type="button" id="deleteSkill"
-                                            class="btn btn-link p-0 text-decoration-none"><i
-                                                class="fa-solid fa-xmark text-dark"></i></button>
-                                    </div>
-                                @endforeach --}}
                                 @foreach ($applicant->skills as $skill)
                                     <div class="py-1 px-3 me-2 mb-3 rounded-pill bg-cyan" data-id="{{ $skill->id }}">
                                         <span>{{ $skill->skill }}</span>
@@ -358,8 +338,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-7">
-                                    {{-- <form action="/applicant/skills/add" method="POST"> --}}
-                                    {{-- @csrf --}}
                                     <div>
                                         <select name="skills" id="skills" class="input-box px-2 rounded">
                                             <option value="0">Add Skills</option>
@@ -370,7 +348,6 @@
                                         <button type="button" id="add_skills" class="btn pink mb-2 py-1 pt-2"><i
                                                 class="fa-solid fa-plus me-2"></i> Add</button>
                                     </div>
-                                    {{-- </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -532,11 +509,7 @@
                         skills: selectedSkills // Send the selected skills array
                     },
                     success: function(response) {
-                        // Handle the response from the server
-                        // if (response.success) {
-                        // Optionally update the page, like clearing the form or updating the UI
                         $('#skills').val([]); // Clear the selection
-                        // let skills_html = [];
                         let skills_html = [];
                         let new_skills = response.skills;
 
@@ -557,10 +530,6 @@
                         // }
 
                     },
-                    // error: function(xhr, status, error) {
-                    //     // Handle error (optional)
-                    //     alert('An error occurred while adding skills.');
-                    // }
                 });
             }
 
@@ -569,14 +538,14 @@
         });
 
         $(document).on('click', '#deleteSkill', function() {
-            let skillElement = $(this).closest('div'); // Get the parent skill div
-            let skillId = skillElement.data('id'); // Assuming skill ID is stored in a data attribute on the div
+            let skillElement = $(this).closest('div');
+            let skillId = skillElement.data('id');
 
             $.ajax({
-                type: 'DELETE', // HTTP method for deletion
+                type: 'DELETE',
                 url: `/applicant/skills/delete/${skillId}`, // RESTful endpoint for deleting a skill
                 data: {
-                    _token: '{{ csrf_token() }}' // CSRF token for security
+                    _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
                     if (response.success) {
@@ -588,12 +557,10 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors
                     alert('An error occurred while deleting the skill.');
                 }
             });
         });
-
 
         document.addEventListener('DOMContentLoaded', function() {
             // Get all the buttons and content sections
@@ -629,19 +596,15 @@
                 showContent('skillsContent');
             });
 
-            // Function to show the relevant content and hide others
             function showContent(contentId) {
-                // Hide all content sections
                 const contents = document.querySelectorAll('.content');
                 contents.forEach(function(content) {
                     content.style.display = 'none';
                 });
 
-                // Show the selected content
                 const selectedContent = document.getElementById(contentId);
                 selectedContent.style.display = 'block';
             }
-
         });
 
         function showExpForm(event) {

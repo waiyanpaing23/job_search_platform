@@ -19,21 +19,17 @@
     <div class="container-fluid bg-blue text-dark d-flex justify-content-center align-items-center">
 
             <div class="zero-margin d-flex pt-4">
-
                 <div class="col-12 col-lg-6 py-4 px-5 bg-white d-flex flex-column justify-content-center">
                     <h2 class="mb-4">Login as Employer</h2>
-
                     <h4>Welcome Back!</h4>
 
                     <form method="POST" action="{{ route('employer.login') }}">
                         @csrf
-
                         <input type="hidden" value="employer" name="role">
-
                         <!-- Email Address -->
                         <div class="mt-4">
 
-                            <input class="form-control" type="email" name="email" value="{{ old('email') }}"
+                            <input class="form-control" type="text" name="email" value="{{ old('email') }}"
                                 placeholder="Email Address" required>
                             @error('email')
                             <small class="text-sm text-danger">{{ $message }}</small>
@@ -42,7 +38,6 @@
 
                         <!-- Password -->
                         <div class="mt-4">
-
                             <input class="form-control" type="password" name="password"
                                 placeholder="Password" required>
                             @error('password')
@@ -77,13 +72,6 @@
                             <a href="{{ route('login') }}" class="text-decoration-none">Login as Applicant</a>
                         </div>
                     </form>
-                    <!-- <hr class="my-4">
-                    <a href="{{ url('/auth/google/redirect') }}" class="text-decoration-none">
-                        <div class="google d-flex justify-content-center align-items-center p-1 rounded">
-                            <img src="{{ asset('images/google.png') }}" class="me-4">
-                            <span class="text-black">Sign in with Google</span>
-                        </div>
-                    </a> -->
                 </div>
 
                 <div class="col-12 col-lg-6 register-img border-2">

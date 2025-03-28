@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        $this->call(CategorySeeder::class);
+        $this->call(SkillSeeder::class);
+
         User::factory()->create([
             'first_name' => 'superadmin',
             'last_name' => null,

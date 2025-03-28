@@ -51,7 +51,7 @@ class JobController extends Controller
 
         return to_route('job.detail', ['id' => $job->id])->with([
             'title' => 'Job Posted Successfully!',
-            'message' => 'Your job post has been created successfully. You can view or manage your job posts in [ My Jobs ].'
+            'message' => 'Your job post has been created successfully. You can view or manage your job posts in [ Job Overview ].'
         ]);
     }
 

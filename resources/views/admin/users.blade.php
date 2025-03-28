@@ -101,11 +101,6 @@
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="{{ route('user.view', $user->id) }}">View
                                                     Profile</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item text-danger" onclick="return confirm('Are you sure to want to delete this user?')"
-                                                        href="{{ route('user.delete', $user->id) }}">Delete User</a></li>
                                             </ul>
                                         </li>
 

@@ -12,13 +12,7 @@ class SkillController extends Controller
     {
         $applicant = Auth::user()->applicant;
 
-        // $request->validate([
-        //     'skills' => 'required|array',
-        //     'skills.*' => 'exists:skills,id|unique:applicant_skill,skill_id',
-        // ]);
-
         $applicant->skills()->attach($request->skills);
-        // return redirect()->route('applicant.profile.edit');
         $skills = $applicant->skills;
         return response()->json([
             'skills'=>$skills
